@@ -34,7 +34,7 @@ var query = client.query('CREATE TABLE INCIDENTE(id SERIAL PRIMARY KEY,'
                 +'detalle     VARCHAR(400) not null,'
                 +'prioridad   VARCHAR(10) not null)');
 
-query.on("end", client.end.bind(client));
+//query.on("end", client.end.bind(client));
   });
   console.log("Transaccion completada correctamente.");
 };
@@ -60,7 +60,7 @@ exports.getAll = function(req, res) {
           });
 
         query.on("end", function (result) {
-              client.end.bind(client);
+              //client.end.bind(client);
               console.log("Termina la query getAll");
               res.json(JSON.stringify(rows));
           });
@@ -84,7 +84,7 @@ client.query("INSERT INTO INCIDENTE (generadoPor,fecha,estado,detalle,prioridad)
                               console.log(err);
                           }
                               client.on("end",function(result){
-                              client.end.bind(client);
+                              //client.end.bind(client);
                               res.json({message:"Se inserto correctamente"});
                           });
 
