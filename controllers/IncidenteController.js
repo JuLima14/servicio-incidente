@@ -67,15 +67,15 @@ exports.getAll = function(req, res) {
     //res.json({ message: 'GET /getAll' });
 };
 exports.insert = function(req, res) {
-  console.log('POST /insert '+ res);
+  console.log('POST /insert '+ res.generadoPor +res.fecha+res.estado+res.detalle+res.prioridad);
 
   dbContext.connect(process.env.DATABASE_URL,function(err,client){
 
     if(err){
       console.error(err);
     }
-    var query = client.query("INSERT INTO INCIDENTE"
-                +"VALUES ("+res.generadoPor+","+res.fecha+","+res.estado+","+res.detalle+","+res.prioridad+")");
+    var query = client.query("INSERT INTO INCIDENTE (generadoPor,fecha,estado,detalle,prioridad)"
+                            +"VALUES("+res.generadoPor+","+res.fecha+","+res.estado+","+res.detalle+","+res.prioridad+");");
 
     query.on("end",function(result){
       res.json({message:"Se inserto correctamente"});
