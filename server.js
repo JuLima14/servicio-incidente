@@ -50,7 +50,7 @@ router.route('/').get(function(req, res) {
 });
 
 router.route('/getall').get(IncidentesController.getAll);
-router.route('/insert').post(IncidentesController.insert);
+router.route('/insert').post(IncidentesController.insert(req.body,res));
 
 app.use('/incidentes', router);
 

@@ -68,7 +68,7 @@ exports.getAll = function(req, res) {
 };
 exports.insert = function(req, res) {
   console.log('POST /insert '+ req.generadoPor +req.fecha+req.estado+req.detalle+req.prioridad);
-
+  console.log('POST /insert '+ res.generadoPor +res.fecha+res.estado+res.detalle+res.prioridad);
   dbContext.connect(process.env.DATABASE_URL,function(err,client){
 
     if(err){
