@@ -4,7 +4,7 @@ var properties;
 
 exports.setProperties = function(propFinder, pgClient){
 
-  propFinder.parse('..servicio-incidente/properties/properties_database',{path : true},function(error,obj){
+  propFinder.parse('../properties_database',{path : true},function(error,obj){
     if(error){
       return console.error(error);
     }
