@@ -15,7 +15,6 @@ var port                 = process.env.PORT || 8080;       // set port
 var propertiesFinder     = require('properties');
 var db                   = require("pg");
 var IncidentesController = require('../app/controllers/IncidenteController');
-var properties_database;
 //nos permite las transacciones con ssl para conectarnos a la BD
 //db.defaults.ssl = true;
 //se cargan las librerias en el servidor
@@ -53,7 +52,7 @@ router.route('/').get(function(req, res) {
 router.route('/getAll').get(IncidentesController.getAll);
 router.route('/insert').post(IncidentesController.insert);
 
-//app.use('/', router);
+app.use('/incidentes', router);
 
 //app.listen(port);
 
