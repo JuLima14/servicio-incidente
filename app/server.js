@@ -17,7 +17,7 @@ var db                   = require("pg");
 var IncidentesController = require('../app/controllers/IncidenteController');
 var properties_database;
 //nos permite las transacciones con ssl para conectarnos a la BD
-db.defaults.ssl = true;
+//db.defaults.ssl = true;
 //se cargan las librerias en el servidor
 // esto nos permite obtener data con un POST
 app.use(bodyParser.urlencoded({ extended: true }));
