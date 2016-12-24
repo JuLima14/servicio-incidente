@@ -16,7 +16,7 @@ var propertiesFinder     = require('properties');
 var db                   = require("pg");
 var IncidentesController = require('../controllers/IncidenteController');
 //nos permite las transacciones con ssl para conectarnos a la BD
-//db.defaults.ssl = true;
+db.defaults.ssl = true;
 //se cargan las librerias en el servidor
 // esto nos permite obtener data con un POST
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,7 +49,7 @@ router.route('/').get(function(req, res) {
     res.json({ message: 'server ok' });
 });
 
-router.route('/getAll').get(IncidentesController.getAll);
+router.route('/getall').get(IncidentesController.getAll);
 router.route('/insert').post(IncidentesController.insert);
 
 app.use('/incidentes', router);
