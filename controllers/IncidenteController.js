@@ -68,9 +68,9 @@ exports.getAll = function(req, res) {
 };
 exports.insert = function(req, res) {
   console.log('POST /insert '+ req.body.generadoPor +req.body.fecha+req.body.estado+req.body.detalle+req.body.prioridad);
-  console.log('POST /insert '+ res.generadoPor +res.body.fecha+res.body.estado+res.body.detalle+res.body.prioridad);
+  //console.log('POST /insert '+ res.body.generadoPor +res.body.fecha+res.body.estado+res.body.detalle+res.body.prioridad);
   dbContext.connect(process.env.DATABASE_URL,function(err,client){
-
+console.log("Comienza la query insert");
     if(err){
       console.error(err);
     }
