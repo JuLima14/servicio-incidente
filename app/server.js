@@ -4,18 +4,6 @@
 // =============================================================================
 
 // call the packages we need
-<<<<<<< Updated upstream
-var express    = require('express');        // call express
-var app        = express();                 // define el servidor usando express
-var http     = require("http");
-var server   = http.createServer(app);
-var bodyParser = require('body-parser');
-var methodOverride  = require("method-override");
-var ip = require("ip");
-var pg = require("pg");
-var DATABASE_URL1 = "postgres://twlfziyretvaol:e47476a474996d6288a1cedf20448b60e1352f27783af0d506d2d589746805c2@ec2-54-235-112-37.compute-1.amazonaws.com:5432/d7t6cddl7ofpsl?ssl=true";
-var port = process.env.PORT || 8080;        // set our port
-=======
 var express              = require('express');        // call express
 var app                  = express();                 // define el servidor usando express
 var http                 = require("http");
@@ -26,8 +14,6 @@ var ip                   = require("ip");
 var port                 = process.env.PORT || 8080;       // set port
 var propertiesFinder     = require('properties');
 var db                   = require("pg");
-
-
 var IncidentesController = require('../app/controllers/IncidenteController');
 var properties_database;
 //nos permite las transacciones con ssl para conectarnos a la BD
