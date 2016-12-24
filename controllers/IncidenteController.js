@@ -49,17 +49,18 @@ exports.getAll = function(req, res) {
       if(err){
         throw err;
       }
-
+      console.log("Comienza la query getAll");
       query =  client.query('SELECT * FROM INCIDENTE');
 
-        client.on('row', function(row, res) {
+        query.on('row', function(row, res) {
             rows.addRow(row);
           });
 
-        client.on("end", function (result) {
+        query.on("end", function (result) {
               res.json(JSON.stringify(rows));
           });
     });
+    console.log("Termina la query getAll")
     //res.json({ message: 'GET /getAll' });
 };
 exports.insert = function(req, res) {
