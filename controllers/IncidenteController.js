@@ -67,7 +67,7 @@ exports.getAll = function(req, res) {
     //res.json({ message: 'GET /getAll' });
 };
 exports.insert = function(req, res) {
-  console.log('POST /insert');
+  console.log('POST /insert ' JSON.stringify(res));
 
   dbContext.connect(process.env.DATABASE_URL,function(err,client){
 
