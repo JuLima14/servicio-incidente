@@ -60,8 +60,9 @@ exports.getAll = function(req, res) {
           });
 
         query.on("end", function (result) {
-              res.json(JSON.stringify(rows));
+              client.end.bind(client);
               console.log("Termina la query getAll");
+              res.json(JSON.stringify(rows));
           });
     });
     //res.json({ message: 'GET /getAll' });
@@ -70,15 +71,23 @@ exports.insert = function(req, res) {
   console.log('POST /insert '+ req.body.generadoPor +req.body.fecha+req.body.estado+req.body.detalle+req.body.prioridad);
   //console.log('POST /insert '+ res.body.generadoPor +res.body.fecha+res.body.estado+res.body.detalle+res.body.prioridad);
   dbContext.connect(process.env.DATABASE_URL,function(err,client){
-console.log("Comienza la query insert");
-    if(err){
-      console.error(err);
-    }
-    var query = client.query("INSERT INTO INCIDENTE (generadoPor,fecha,estado,detalle,prioridad)"
-                            +"VALUES("+req.body.generadoPor+","+req.body.fecha+","+req.body.estado+","+req.body.detalle+","+req.body.prioridad+");");
 
-    query.on("end",function(result){
-      res.json({message:"Se inserto correctamente"});
-    });
+      if(err){
+        console.error(err);
+      }
+      console.log("Comienza la query insert");
+client.query("INSERT INTO INCIDENTE (generadoPor,fecha,estado,detalle,prioridad)"
+            +"VALUES($1,$2,$3,$4,$5,$6) RETURNING id",
+            [req.body.generadoPor,req.body.fecha,req.body.estado,req.body.detalle,req.body.prioridad],
+            function(err, result) {
+                          if (err) {
+                              console.log(err);
+                          }
+                              client.on("end",function(result){
+                              client.end.bind(client);
+                              res.json({message:"Se inserto correctamente"});
+                          });
+
+         });
   });
 };
