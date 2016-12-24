@@ -77,7 +77,7 @@ exports.insert = function(req, res) {
       }
       console.log("Comienza la query insert");
 client.query("INSERT INTO INCIDENTE (generadoPor,fecha,estado,detalle,prioridad)"
-            +"VALUES($1,$2,$3,$4,$5,$6) RETURNING id",
+            +"VALUES($1,$2,$3,$4,$5) RETURNING id",
             [req.body.generadoPor,req.body.fecha,req.body.estado,req.body.detalle,req.body.prioridad],
             function(err, result) {
                           if (err) {
