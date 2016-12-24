@@ -4,17 +4,17 @@
 // =============================================================================
 
 // call the packages we need
-var express              = require('express');        // call express
+var express              = require("express");        // call express
 var app                  = express();                 // define el servidor usando express
 var http                 = require("http");
 var server               = http.createServer(app);
-var bodyParser           = require('body-parser');
+var bodyParser           = require("body-parser");
 var methodOverride       = require("method-override");
 var ip                   = require("ip");
 var port                 = process.env.PORT || 8080;       // set port
-var propertiesFinder     = require('properties');
+var propertiesFinder     = require("properties");
 var db                   = require("pg");
-var IncidentesController = require('../controllers/IncidenteController');
+var IncidentesController = require("/controllers/IncidenteController");
 //nos permite las transacciones con ssl para conectarnos a la BD
 db.defaults.ssl = true;
 //se cargan las librerias en el servidor
