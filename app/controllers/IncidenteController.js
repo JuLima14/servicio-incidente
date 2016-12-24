@@ -9,11 +9,10 @@ exports.setProperties = function(propFinder, pgClient){
       return console.error(error);
     }
     properties = obj;
-    console.log("Se cargaron correctamente las properties: " + process.env.DATABASE_URL);
+    console.log("Se cargaron correctamente las properties: " + properties.DATABASE_URL);
   });
 
   dbContext = pgClient;
-  console.log("MOSTRANDO DBCONTEXT: " + dbContext);
 };
 
 
@@ -46,22 +45,21 @@ exports.getAll = function(req, res) {
     var query;
     var rows = [];
 
-    dbContext.connect(process.env.DATABASE_URL,function(err,client){
+    dbContext.connect(properties.DATABASE_URL,function(err,client){
       if(err){
         throw err;
       }
-      console.log("Comienza la query getAll");
+
       query =  client.query('SELECT * FROM INCIDENTE');
 
-        query.on('row', function(row, res) {
+        client.on('row', function(row, res) {
             rows.addRow(row);
           });
 
-        query.on("end", function (result) {
+        client.on("end", function (result) {
               res.json(JSON.stringify(rows));
           });
     });
-    console.log("Termina la query getAll")
     //res.json({ message: 'GET /getAll' });
 };
 exports.insert = function(req, res) {
