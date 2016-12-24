@@ -16,6 +16,7 @@ var propertiesFinder     = require("properties");
 var db                   = require("pg");
 var IncidentesController = require("../app/controllers/IncidenteController");
 //nos permite las transacciones con ssl para conectarnos a la BD
+pg.defaults.poolIdleTimeout = 600000;
 db.defaults.ssl = true;
 //se cargan las librerias en el servidor
 // esto nos permite obtener data con un POST
