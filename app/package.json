@@ -3,20 +3,25 @@
   "version": "1.0.0",
   "description": "servicio",
   "main": "server.js",
+
   "keywords": [
     "example",
     "heroku"
   ],
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
   "author": "Julian Lima",
   "license": "MIT",
+
   "dependencies": {
     "body-parser": "~1.0.1",
     "express": "^4.14.0",
     "ip": "^1.1.4",
     "method-override": "^2.1.2",
-    "pg": "6.1.2"
+    "pg": "6.1.2",
+    "properties":"1.2.1"
   }
 }
