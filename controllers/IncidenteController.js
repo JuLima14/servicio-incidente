@@ -27,14 +27,14 @@ dbContext.connect(process.env.DATABASE_URL,function(err,client){
   }
 console.log('Comienza creacion de tabla.');
 
-client.query('CREATE TABLE INCIDENTE(id SERIAL PRIMARY KEY,'
+var query = client.query('CREATE TABLE INCIDENTE(id SERIAL PRIMARY KEY,'
                 +'generadoPor VARCHAR(100) not null,'
                 +'fecha       VARCHAR(10) not null,'
                 +'estado      VARCHAR(100) not null,'
                 +'detalle     VARCHAR(400) not null,'
                 +'prioridad   VARCHAR(10) not null)');
 
-client.on("end", client.end.bind(client));
+query.on("end", client.end.bind(client));
   });
   console.log("Transaccion completada correctamente.");
 };
@@ -43,12 +43,14 @@ client.on("end", client.end.bind(client));
 exports.getAll = function(req, res) {
 
     console.log('GET /getAll');
-    var query;
-    var rows = [];
+
 
     dbContext.connect(process.env.DATABASE_URL,function(err,client){
+      var query;
+      var rows = [];
+
       if(err){
-        throw err;
+        console.error(err);
       }
       console.log("Comienza la query getAll");
       query =  client.query('SELECT * FROM INCIDENTE');
@@ -59,9 +61,9 @@ exports.getAll = function(req, res) {
 
         query.on("end", function (result) {
               res.json(JSON.stringify(rows));
+              console.log("Termina la query getAll");
           });
     });
-    console.log("Termina la query getAll")
     //res.json({ message: 'GET /getAll' });
 };
 exports.insert = function(req, res) {
@@ -70,13 +72,13 @@ exports.insert = function(req, res) {
   dbContext.connect(process.env.DATABASE_URL,function(err,client){
 
     if(err){
-      throw err;
+      console.error(err);
     }
-    client.query("INSERT INTO INCIDENTE"
+    var query = client.query("INSERT INTO INCIDENTE"
                 +"VALUES ("+res.generadoPor+","+res.fecha+","+res.estado+","+res.detalle+","+res.prioridad+")");
 
-    client.on("end",function(result){
-      res.json({message:"Se inserto correctamente" + JSON.stringify(res)});
+    query.on("end",function(result){
+      res.json({message:"Se inserto correctamente"});
     });
   });
 };
