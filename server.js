@@ -53,7 +53,7 @@ router.route('/').get(function(req, res) {
 router.route('/getAll').get(IncidentesController.getAll);
 router.route('/insert').post(IncidentesController.insert);
 
-app.use('/', router);
+//app.use('/', router);
 
 //app.listen(port);
 
