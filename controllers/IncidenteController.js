@@ -39,6 +39,30 @@ console.log('Comienza creacion de tabla.');
   console.log("Transaccion completada correctamente.");
 };
 
+
+
+exports.getById = function(req,res){
+
+  dbContext.connect(process.env.DATABASE_URL,function(err,client){
+    var query;
+    var result;
+    if(err){
+      console.error(err);
+    }
+
+    query =  client.query('SELECT * FROM INCIDENTE WHERE id = $1',req.query.id);
+
+    query.on('row', function(row, res) {
+        result = row;
+      });
+
+    query.on("end", function (resu) {
+          client.end.bind(client);
+          console.log("Termina la query getById");
+          res.json(JSON.stringify(result));
+      });
+  });
+}
 //GET - Devuelve todos los incidentes en la base de datos
 exports.getAll = function(req, res) {
 
@@ -60,7 +84,7 @@ exports.getAll = function(req, res) {
           });
 
         query.on("end", function (result) {
-              //client.end.bind(client);
+              client.end.bind(client);
               console.log("Termina la query getAll");
               res.json(JSON.stringify(rows));
           });
