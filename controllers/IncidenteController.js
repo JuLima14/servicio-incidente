@@ -46,11 +46,12 @@ exports.getById = function(req,res){
   dbContext.connect(process.env.DATABASE_URL,function(err,client){
     var query;
     var result;
+    console.log("Parametro recibido: "+ req.query.id);
     if(err){
       console.error(err);
     }
 
-    query =  client.query('SELECT * FROM INCIDENTE WHERE id = $1',req.query.id);
+    query =  client.query('SELECT * FROM INCIDENTE WHERE id = $1',[req.query.id]);
 
     query.on('row', function(row, res) {
         result = row;
