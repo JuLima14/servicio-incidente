@@ -27,14 +27,14 @@ dbContext.connect(process.env.DATABASE_URL,function(err,client){
   }
 console.log('Comienza creacion de tabla.');
 
-var query = client.query('CREATE TABLE INCIDENTE(id SERIAL PRIMARY KEY,'
+    client.query('CREATE TABLE INCIDENTE(id SERIAL PRIMARY KEY,'
                 +'generadoPor VARCHAR(100) not null,'
                 +'fecha       VARCHAR(10) not null,'
                 +'estado      VARCHAR(100) not null,'
                 +'detalle     VARCHAR(400) not null,'
                 +'prioridad   VARCHAR(10) not null)');
 
-//query.on("end", client.end.bind(client));
+        client.on("end", client.end.bind(client));
   });
   console.log("Transaccion completada correctamente.");
 };
@@ -71,23 +71,20 @@ exports.insert = function(req, res) {
   console.log('POST /insert '+ req.body.generadoPor +req.body.fecha+req.body.estado+req.body.detalle+req.body.prioridad);
   //console.log('POST /insert '+ res.body.generadoPor +res.body.fecha+res.body.estado+res.body.detalle+res.body.prioridad);
   dbContext.connect(process.env.DATABASE_URL,function(err,client){
-
+    var query ;
       if(err){
         console.error(err);
       }
-      console.log("Comienza la query insert");
-client.query("INSERT INTO INCIDENTE (generadoPor,fecha,estado,detalle,prioridad)"
-            +"VALUES($1,$2,$3,$4,$5) RETURNING id",
-            [req.body.generadoPor,req.body.fecha,req.body.estado,req.body.detalle,req.body.prioridad],
-            function(err, result) {
-                          if (err) {
-                              console.log(err);
-                          }
-                              client.on("end",function(result){
-                              //client.end.bind(client);
-                              res.json({message:"Se inserto correctamente"});
-                          });
 
-         });
+      console.log("Comienza la query insert");
+
+      query = client.query("INSERT INTO INCIDENTE (generadoPor,fecha,estado,detalle,prioridad)"
+      +"VALUES($1,$2,$3,$4,$5) RETURNING id",[req.body.generadoPor,req.body.fecha,req.body.estado,req.body.detalle,req.body.prioridad]);
+
+      query.on("end",function(result){
+                client.end.bind(client);
+                res.json({message:"Se inserto correctamente"});
+      });
+
   });
 };
