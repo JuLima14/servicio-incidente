@@ -56,7 +56,7 @@ exports.getAll = function(req, res) {
       query =  client.query('SELECT * FROM INCIDENTE');
 
         query.on('row', function(row, res) {
-            rows.addRow(row);
+            rows.push(row);
           });
 
         query.on("end", function (result) {
