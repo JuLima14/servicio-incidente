@@ -15,7 +15,7 @@ var port                 = process.env.PORT || 8080;       // set port
 var propertiesFinder     = require("properties");
 var db                   = require("pg");
 var redis = require("redis");
-var sessionUsers = redis.createClient();
+var sessionUsers = redis.createClient(port,ip.address());
 var IncidentesController = require("../app/controllers/IncidenteController");
 //nos permite las transacciones con ssl para conectarnos a la BD
 db.defaults.poolIdleTimeout = 600000;
