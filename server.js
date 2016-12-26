@@ -15,9 +15,12 @@ var port                 = process.env.PORT || 8080;
 var portRedis            = process.env.PORT || 8080;       // set port
 var propertiesFinder     = require("properties");
 var db                   = require("pg");
-var redis = require("redis");
-var sessionUsers = redis.createClient(portRedis,ip.address());
 var IncidentesController = require("../app/controllers/IncidenteController");
+
+var connect = require('connect'),
+RedisStore = require('connect-redis')(connect),
+redis = require('heroku-redis-client');
+
 //nos permite las transacciones con ssl para conectarnos a la BD
 db.defaults.poolIdleTimeout = 600000;
 db.defaults.ssl = true;
@@ -26,11 +29,14 @@ db.defaults.ssl = true;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-sessionUsers.on("error", function (err) {
-    portRedis = portRedis + 1;
-    console.log("Error " + err);
-});
-sessionUsers.set("string key", "string val", redis.print);
+
+
+
+
+connect.createServer(
+connect.cookieParser(),
+connect.session({ store: new RedisStore({ client: redis.createClient() }), secret: 'keyboard cat' })
+);
 
 //INICIALIZACION de controllers creacion de tablas
 //==============================================================================
