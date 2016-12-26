@@ -23,7 +23,8 @@
     "method-override": "^2.1.2",
     "pg": "6.1.2",
     "properties":"1.2.1",
-    "redis":"2.6.3"
+    "redis":"2.6.3",
+    "connect":"3.5.0"
   },
 
   "repository" :{
