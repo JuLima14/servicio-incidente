@@ -1,5 +1,5 @@
 // server.js
-
+//http://soenkerohde.com/2012/04/using-redis-as-node-js-express-session-storage-on-heroku/comment-page-1/
 // BASE SETUP
 // =============================================================================
 
