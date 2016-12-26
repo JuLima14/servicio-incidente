@@ -14,7 +14,7 @@ var ip                   = require("ip");
 var port                 = process.env.PORT || 8080;       // set port
 var propertiesFinder     = require("properties");
 var db                   = require("pg");
-var redis = require("redis"),
+var redis = require("redis");
 var sessionUsers = redis.createClient();
 var IncidentesController = require("../app/controllers/IncidenteController");
 //nos permite las transacciones con ssl para conectarnos a la BD
@@ -29,6 +29,7 @@ sessionUsuers.on("error", function (err) {
     console.log("Error " + err);
 });
 sessionUsuers.set("string key", "string val", redis.print);
+
 //INICIALIZACION de controllers creacion de tablas
 //==============================================================================
 //TABLA INCIDENTE
