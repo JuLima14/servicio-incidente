@@ -11,11 +11,12 @@ var server               = http.createServer(app);
 var bodyParser           = require("body-parser");
 var methodOverride       = require("method-override");
 var ip                   = require("ip");
-var port                 = process.env.PORT || 8080;       // set port
+var port                 = process.env.PORT || 8080;
+var portRedis            = process.env.PORT || 8080;       // set port
 var propertiesFinder     = require("properties");
 var db                   = require("pg");
 var redis = require("redis");
-var sessionUsers = redis.createClient(port,ip.address());
+var sessionUsers = redis.createClient(portRedis,ip.address());
 var IncidentesController = require("../app/controllers/IncidenteController");
 //nos permite las transacciones con ssl para conectarnos a la BD
 db.defaults.poolIdleTimeout = 600000;
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 sessionUsers.on("error", function (err) {
+    portRedis = portRedis + 1;
     console.log("Error " + err);
 });
 sessionUsers.set("string key", "string val", redis.print);
