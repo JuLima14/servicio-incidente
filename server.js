@@ -25,10 +25,10 @@ db.defaults.ssl = true;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-sessionUsuers.on("error", function (err) {
+sessionUsers.on("error", function (err) {
     console.log("Error " + err);
 });
-sessionUsuers.set("string key", "string val", redis.print);
+sessionUsers.set("string key", "string val", redis.print);
 
 //INICIALIZACION de controllers creacion de tablas
 //==============================================================================
