@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="aplicacion">
+    <head>
+        <meta charset="utf-8" />
+        <title> Incidentes </title>
+        <link type="text/css"          href="./stylesheets/bootstrap.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="./javascripts/angular.min.js"></script>
+        <script type="text/javascript" src="./angularjs/incidentecontroller.js"></script>
+    </head>
+    <body>
+        <div class="container" ng-controller="Incidente">
+            <h1> Incidentes </h1>
+            <form action="javascript:void(0);">
+                <div class="row">
+                    <div class="span4">
+                        <label> Generado por </label>
+                        <input type="text" ng-model="generadoPor" />
+                    </div>
+                    <div class="span4">
+                        <label> Fecha registro </label>
+                        <input type="text" ng-model="fecha" />
+                    </div>
+                    <div class="span4">
+                        <label> Estado </label>
+                        <input type="text" ng-model="estado" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span4">
+                        <label> Prioridad </label>
+                        <input type="text" ng-model="prioridad" />
+                    </div>
+                    <div class="span4">
+                        <label> Detalle </label>
+                        <input type="text" ng-model="detalle" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span4">
+                        <input type="submit" value="Guardar" class="btn btn-success" ng-click="guardar()" />
+                        <input type="button" value="Limpiar" class="btn btn-danger" ng-click="limpiarDatos()" />
+                    </div>
+                </div>
+            </form>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th> Generado Por </th>
+                        <th> Fecha </th>
+                        <th> Estado </th>
+                        <th> Prioridad </th>
+                        <th> Detalle </th>
+                        <th>  </th>
+                        <th>  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in incidentes">
+                        <td> {{item.generadoPor}} </td>
+                        <td> {{item.fecha}} </td>
+                        <td> {{item.estado}} </td>
+                        <td> {{item.prioridad}} </td>
+                        <td> {{item.detalle}} </td>
+                        <td> <a href="javascript:void(0);" class="btn btn-info" ng-click="recuperar($index)"> Editar </a> </td>
+                        <td> <a href="javascript:void(0);" class="btn btn-danger" ng-click="eliminar($index)"> Eliminar </a> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

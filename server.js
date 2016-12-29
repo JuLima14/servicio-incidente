@@ -7,28 +7,34 @@
 var express              = require("express");        // call express
 var app                  = express();                 // define el servidor usando express
 var http                 = require("http");
-var server               = http.createServer(app);
 var bodyParser           = require("body-parser");
 var methodOverride       = require("method-override");
 var ip                   = require("ip");
-var port                 = process.env.PORT || 8080;     // set port
-var propertiesFinder     = require("properties");
 var db                   = require("pg");
-var IncidentesController = require("../app/controllers/IncidenteController");
+var path                 = require('path');
+var config               = require("./properties.js");
 
+var IncidenteServiceImpl;
+
+if(config.PORT != 8080){
+  IncidenteServiceImpl = require("../app/services/IncidenteService");
+}else{
+  IncidenteServiceImpl = require("../Servicio-incidente/services/IncidenteService");
+}
 
 //nos permite las transacciones con ssl para conectarnos a la BD
-db.defaults.poolIdleTimeout = 600000;
-db.defaults.ssl = true;
+db.defaults.poolIdleTimeout = config.databaseConfig.poolIdleTimeout;
+db.defaults.ssl = config.databaseConfig.ssl;
 //se cargan las librerias en el servidor
 // esto nos permite obtener data con un POST
+app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
+app.use(express.static(path.join(__dirname, 'public')));
 //INICIALIZACION de controllers creacion de tablas
 //==============================================================================
 //TABLA INCIDENTE
-IncidentesController.setProperties(propertiesFinder,db);
+IncidenteServiceImpl.setProperties(config.databaseConfig.DATABASE_URL,db);
 //IncidentesController.createTable();
 
 
@@ -45,22 +51,27 @@ router.use(function(req, res, next) {
 });
 
 
-// es la ruta predefinida del servidor ( GET http://localhost:8080/api)
+// es la ruta predefinida del servidor ( GET http://localhost:8080/incidentes)
 router.route('/').get(function(req, res) {
-    res.json({ message: 'server ok' });
+    //res.sendFile(path.join(__dirname, '../public', 'index.html'));
+    //res.sendFile('index.html', { root: path.join(__dirname, '../public') });
+    res.sendFile('public/index.html' , { root : __dirname});
 });
 
-router.route('/getall').get(IncidentesController.getAll);
-router.route('/insert').post(IncidentesController.insert);
-router.route('/getbyid/:id').get(IncidentesController.getById);
+router.route('/getall').get(IncidenteServiceImpl.getAll);
+router.route('/insert').post(IncidenteServiceImpl.insert);
+//router.route('/getbyid/:id').get(IncidenteServiceImpl.getById);
 
-app.use('/incidentes', router);
+app.use('/', router);
 
 //app.listen(port);
+http.createServer(app).listen(config.PORT, function(){
+  console.log("Node server corriendo en http://"+ip.address()+":"+config.PORT);
+});
 
-app.listen(port, function() {
+/*app.listen(port, function() {
 //obtengo la ip donde se esta ejecutando el servidor
 //require('dns').lookup(require('os').hostname(),function(err, add, fam){});
 // mi ip
 console.log("Node server corriendo en http://"+ip.address()+":"+port);
-});
+});*/

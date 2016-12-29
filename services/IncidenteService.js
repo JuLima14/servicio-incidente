@@ -1,26 +1,18 @@
 
 var dbContext;
-var properties;
+var DATABASE_URL;
 
-exports.setProperties = function(propFinder, pgClient){
+exports.setProperties = function(databaseUrl, pgClient){
 
-  propFinder.parse('../app/properties/properties_database',{path : true},function(error,obj){
-    if(error){
-      return console.error(error);
-    }
-    properties = obj;
-    console.log("Se cargaron correctamente las properties: " + properties.DATABASE_URL);
-  });
-
+  DATABASE_URL = databaseUrl;
   dbContext = pgClient;
 };
 
 
 exports.createTable = function (){
 
-//console.log("nada "+properties.DATABASE_URL);
 
-dbContext.connect(process.env.DATABASE_URL,function(err,client){
+dbContext.connect((process.env.DATABASE_URL || DATABASE_URL),function(err,client){
    if (err){
       throw err;
   }
@@ -44,8 +36,8 @@ exports.getAll = function(req, res) {
     console.log('GET /getAll');
     var query;
     var rows = [];
-
-    dbContext.connect(properties.DATABASE_URL,function(err,client){
+console.log((process.env.DATABASE_URL || DATABASE_URL) );
+    dbContext.connect((process.env.DATABASE_URL || DATABASE_URL),function(err,client){
       if(err){
         throw err;
       }
