@@ -60,13 +60,14 @@ exports.getAll = function(req, res) {
 
       query = client.query('SELECT * FROM INCIDENTE');
 
-        client.on('row', function(row, res) {
-            rows.push(row);
+        query.on('row', function(row, result) {
+            result.addRow(row);
           });
 
         client.on("end", function (result) {
-              client.end.bind(client);
-              res.json(JSON.stringify(rows));
+
+              res.json(JSON.stringify(result.rows, null, "    "));
+              client.end();
           });
     });
 };
