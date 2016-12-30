@@ -25,7 +25,7 @@
 				<div class="row">
 					<div class="span4">
                         <label> Numero </label>
-                        <input type="text" ng-model="numeroCaso" />
+                        <input type="number" ng-model="numeroCaso" />
                     </div>
                     <div class="span4">
                         <label> Generado por </label>
@@ -63,8 +63,8 @@
 
             <table class="table">
                 <thead>
-                    <tr>
-						<th> Nro </th>
+                    <tr><th><input type="submit" value="Cargar" class="btn btn-success" ng-click="cargarIncidentes()"  ></th>
+						            <th> Nro </th>
                         <th> Generado Por </th>
                         <th> Fecha </th>
                         <th> Estado </th>

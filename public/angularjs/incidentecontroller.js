@@ -11,7 +11,7 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
     $scope.prioridad = '';
     $scope.detalle = '';
 	  $scope.cauTexto = '';
-	  $scope.numeroCaso ='';
+	  $scope.numeroCaso = -1;
 
     $scope.incidentes = [];
 
@@ -27,19 +27,20 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
                 detalle: $scope.detalle,
                 numeroCaso: $scope.numeroCaso
             };
+      if(validar(incidente)){
 
-      var incidenteEcontrado = $filter('filter')($scope.incidentes,{numeroCaso: $scope.numeroCaso} ,true);
+        var incidenteEcontrado = $filter('filter')($scope.incidentes,{numeroCaso: $scope.numeroCaso} ,true);
 
       if(incidenteEcontrado.length){
         var index = $scope.incidentes.indexOf(incidenteEcontrado[0])
-        $scope.incidentes[index] = incidente;
+            $scope.incidentes[index] = incidente;
       }else{
             $scope.incidentes.push(incidente);
           }
 
 			$http({
 				method:'POST',
-				url:'http://192.168.0.30/insert',
+				url:'http://172.16.82.29:8080/insert',
 				data: incidente,
 				contentType: "application/json"
 				})
@@ -49,6 +50,7 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
 
 						});
         $scope.limpiarDatos();
+      }
     };
 
     $scope.recuperar = function(index) {
@@ -74,12 +76,12 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
     $scope.limpiarDatos = function() {
         $scope._id = null;
         $scope.generadoPor = '';
-		$scope.fecha = '';
+		      $scope.fecha = '';
         $scope.estado = '';
         $scope.prioridad = '';
         $scope.detalle = '';
-		$scope.numeroCaso = '';
-		$scope.cauTexto = '';
+		      $scope.numeroCaso = '';
+		        $scope.cauTexto = '';
     };
 
 	$scope.cargar = function(){
@@ -90,7 +92,7 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
 			$scope.generadoPor     = $scope.cauTexto.substr(findex, eindex) || '';
 			findex  				       = eindex;
 			findex 					       = $scope.cauTexto.search(" bajo el No.:");
-			$scope.numeroCaso 		 = $scope.cauTexto.substr(findex+14,6) || '';
+			$scope.numeroCaso 		 = parseInt($scope.cauTexto.substr(findex+14,6)) ;
 			var textoBusquedaFecha = " con Fecha de apertura: ";
 			findex 					       = $scope.cauTexto.search(textoBusquedaFecha);
 			$scope.fecha 			     = $scope.cauTexto.substr(findex+textoBusquedaFecha.length,19)|| '';
@@ -99,4 +101,41 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
 			$scope.detalle		     = $scope.cauTexto.substr(findex+textoBusquedaDescr.length,$scope.cauTexto.length)|| '';
 		}
 	};
+$scope.cargarIncidentes = function (){
+  $http({
+    method:'GET',
+    url:'http://172.16.82.29:8080/getall',
+    dataType: "application/json"
+    })
+    .then(function successCallback(response){
+      var log = [];
+      $scope.incidentes = [];
+      angular.forEach($scope.incidentes, function(value, key) {
+          this.push(value);
+      }, log);
+        alert('Enviado correctamente');
+
+        });
+}
+  function validar(incidente){
+    if(incidente.numeroCaso == -1){
+        return false;
+    }
+    if(incidente.generadoPor == ''){
+        return false;
+    }
+    if(incidente.fecha == ''){
+        return false;
+    }
+    if(incidente.estado == ''){
+        return false;
+    }
+    if(incidente.prioridad == ''){
+        return false;
+    }
+    if(incidente.detalle == ''){
+        return false;
+    }
+    return true;
+  }
 };
