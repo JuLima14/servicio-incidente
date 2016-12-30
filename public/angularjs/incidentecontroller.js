@@ -104,7 +104,8 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
 $scope.cargarIncidentes = function (){
   $http({
     method:'GET',
-    url:'http://172.16.82.29:8080/getall',
+    //url:'http://172.16.82.29:8080/getall',
+      url:'http://servicio-incidente.herokuapp.com/getall',
     dataType: "application/json"
     })
     .then(function successCallback(response){
