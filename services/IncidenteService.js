@@ -45,7 +45,7 @@ console.log((process.env.DATABASE_URL || DATABASE_URL) );
       query =  client.query('SELECT * FROM INCIDENTE');
 
         client.on('row', function(row, res) {
-            rows.addRow(row);
+            rows.push(row);
           });
 
         client.on("end", function (result) {
@@ -54,6 +54,7 @@ console.log((process.env.DATABASE_URL || DATABASE_URL) );
     });
     //res.json({ message: 'GET /getAll' });
 };
+
 exports.insert = function(req, res) {
 
     console.log('POST /insert');

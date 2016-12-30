@@ -53,11 +53,12 @@ router.use(function(req, res, next) {
 
 // es la ruta predefinida del servidor ( GET http://localhost:8080/incidentes)
 router.route('/').get(function(req, res) {
-    //res.sendFile(path.join(__dirname, '../public', 'index.html'));
-    //res.sendFile('index.html', { root: path.join(__dirname, '../public') });
     res.sendFile('public/index.html' , { root : __dirname});
 });
 
+router.route('/getip').get(function(req,res){
+  res.json({ip:ip.address()});
+});
 router.route('/getall').get(IncidenteServiceImpl.getAll);
 router.route('/insert').post(IncidenteServiceImpl.insert);
 //router.route('/getbyid/:id').get(IncidenteServiceImpl.getById);
