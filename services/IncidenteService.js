@@ -64,7 +64,7 @@ exports.getAll = function(req, res) {
             result.addRow(row);
           });
 
-        client.on("end", function (result) {
+        query.on("end", function (result) {
 
               res.json(JSON.stringify(result.rows, null, "    "));
               client.end();
