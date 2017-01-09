@@ -110,7 +110,7 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
 		        $scope.cauTexto = '';
     };
 
-	$scope.cargar = function(){
+$scope.cargar = function(){
 
 		if($scope.cauTexto != ''){
 			var inicioTexto        = $scope.cauTexto.search("El caso ha sido reportado por");
@@ -126,19 +126,20 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
 			findex 					       = $scope.cauTexto.search(textoBusquedaFecha);
 			var fecha              = $scope.cauTexto.substr(findex+textoBusquedaFecha.length,19)|| '';
 
-      var palabraFechas      = fecha.split(' ').map(function(palabra){
-        return palabra;
-      });
-      if(palabraFechas.length){
-        var mesNumero =  $filter('filter')(fecha,{mes: palabraFechas[0]} ,true);
-        var diaNumero = palabraFechas[1];
-        var añoNumero = palabraFechas[2];
+      			var palabraFechas      = fecha.split(' ').map(function(palabra){
+        			return palabra;
+     			});
+			
+    		  if(palabraFechas.length){
+       		 	var mesNumero =  $filter('filter')(fecha,{mes: palabraFechas[0]} ,true);
+       			var diaNumero = palabraFechas[1];
+        		var añoNumero = palabraFechas[2];
+			  
+        		$scope.fecha =new Date(añoNumero,mesNumero,diaNumero);
+		  }
 
-        $scope.fecha =new Date(añoNumero+"/"+mesNumero+"/"+diaNumero);
-    }
-
-      var textoBusquedaDescr = "siguiente Descripción: ";
-			findex 					       = $scope.cauTexto.search(textoBusquedaDescr);
+      		var textoBusquedaDescr = "siguiente Descripción: ";
+			findex 			     = $scope.cauTexto.search(textoBusquedaDescr);
 			$scope.detalle		     = $scope.cauTexto.substr(findex+textoBusquedaDescr.length,$scope.cauTexto.length)|| '';
 		}
 	};
