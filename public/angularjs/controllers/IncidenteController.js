@@ -25,7 +25,6 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
     $scope.prioridad = '';
     $scope.detalle = '';
 	  $scope.cauTexto = '';
-<<<<<<< HEAD:public/angularjs/controllers/IncidenteController.js
 	  $scope.numeroCaso ;
 
     $scope.estadosIncidente = ('ON HOLD SMG;ON HOLD STK;EN PROCESO;EN PAUSA;CERRADO;REGISTRADO')
@@ -42,9 +41,6 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
     .split(';').map(function(mes){
         return {mes: mes}
     });
-=======
-	  $scope.numeroCaso = -1;
->>>>>>> origin/master:public/angularjs/incidentecontroller.js
 
     $scope.incidentes = [];
 
@@ -52,19 +48,9 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
 
     $scope.guardar = function() {
 
-<<<<<<< HEAD:public/angularjs/controllers/IncidenteController.js
     var incidente = new Incidente ($scope.generadoPor,$scope.fecha,$scope.estado,$scope.prioridad,$scope.detalle,$scope.numeroCaso);
-=======
-      var incidente = {
-                generadoPor: $scope.generadoPor,
-                fecha: $scope.fecha,
-                estado: $scope.estado,
-                prioridad: $scope.prioridad,
-                detalle: $scope.detalle,
-                numeroCaso: $scope.numeroCaso
-            };
+
       if(validar(incidente)){
->>>>>>> origin/master:public/angularjs/incidentecontroller.js
 
         var incidenteEcontrado = $filter('filter')($scope.incidentes,{numeroCaso: $scope.numeroCaso} ,true);
 
@@ -76,19 +62,13 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
           }
 
 			$http({
-<<<<<<< HEAD:public/angularjs/controllers/IncidenteController.js
+
 				method:'GET',
 				//url:'http://192.168.0.30:8080/insert',
         url:'http://localhost:8080'
 				//data: incidente,
         //headers: {'Content-Type': 'application/json'}
 				//contentType: "application/json"
-=======
-				method:'POST',
-				url:'http://172.16.82.29:8080/insert',
-				data: incidente,
-				contentType: "application/json"
->>>>>>> origin/master:public/angularjs/incidentecontroller.js
 				})
 				.then(function successCallback(response){
 
@@ -122,21 +102,12 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
     $scope.limpiarDatos = function() {
         $scope._id = null;
         $scope.generadoPor = '';
-<<<<<<< HEAD:public/angularjs/controllers/IncidenteController.js
-		    $scope.fecha = '';
-        $scope.estado = '';
-        $scope.prioridad = '';
-        $scope.detalle = '';
-		    $scope.numeroCaso = '';
-		    $scope.cauTexto = '';
-=======
 		      $scope.fecha = '';
         $scope.estado = '';
         $scope.prioridad = '';
         $scope.detalle = '';
 		      $scope.numeroCaso = '';
 		        $scope.cauTexto = '';
->>>>>>> origin/master:public/angularjs/incidentecontroller.js
     };
 
 	$scope.cargar = function(){
@@ -148,16 +119,14 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
 			$scope.generadoPor     = $scope.cauTexto.substr(findex, eindex) || '';
 			findex  				       = eindex;
 			findex 					       = $scope.cauTexto.search(" bajo el No.:");
-<<<<<<< HEAD:public/angularjs/controllers/IncidenteController.js
-			$scope.numeroCaso 		 = parseInt($scope.cauTexto.substr(findex+14,6));
-=======
+
 			$scope.numeroCaso 		 = parseInt($scope.cauTexto.substr(findex+14,6)) ;
->>>>>>> origin/master:public/angularjs/incidentecontroller.js
+
 			var textoBusquedaFecha = " con Fecha de apertura: ";
 			findex 					       = $scope.cauTexto.search(textoBusquedaFecha);
-			var fecha = $scope.cauTexto.substr(findex+textoBusquedaFecha.length,19)|| '';
+			var fecha              = $scope.cauTexto.substr(findex+textoBusquedaFecha.length,19)|| '';
 
-      var palabraFechas = fecha.split(' ').map(function(palabra){
+      var palabraFechas      = fecha.split(' ').map(function(palabra){
         return palabra;
       });
       if(palabraFechas.length){
@@ -174,9 +143,7 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
 			$scope.detalle		     = $scope.cauTexto.substr(findex+textoBusquedaDescr.length,$scope.cauTexto.length)|| '';
 		}
 	};
-<<<<<<< HEAD:public/angularjs/controllers/IncidenteController.js
 
-=======
 $scope.cargarIncidentes = function (){
   $http({
     method:'GET',
@@ -215,5 +182,4 @@ $scope.cargarIncidentes = function (){
     }
     return true;
   }
->>>>>>> origin/master:public/angularjs/incidentecontroller.js
 };
