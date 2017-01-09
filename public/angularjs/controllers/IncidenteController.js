@@ -1,9 +1,23 @@
 
-var aplicacion = angular.module('aplicacion', []);
+var IncidenteModule = angular.module('IncidenteModule', ['ngMaterial', 'ngMessages']);
 
-aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteController]);
+//IncidenteModule.controller('ToastCtrl', ['$scope',' $mdToast',ToastCtrl]);
+IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',IncidenteController])
+.config(function($mdThemingProvider) {
 
- function IncidenteController($scope,$http,$filter) {
+    // Configure a dark theme with primary foreground yellow
+    $mdThemingProvider.theme('docs-dark', 'default')
+      .primaryPalette('blue')
+      .dark();
+
+    $mdThemingProvider.theme('docs-light', 'default')
+        .primaryPalette('blue')
+        .dark();
+
+  });
+
+ function IncidenteController($scope,$http,$filter, $mdToast) {
+
     $scope._id = null;
     $scope.generadoPor = '';
     $scope.fecha = '';
@@ -11,7 +25,22 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
     $scope.prioridad = '';
     $scope.detalle = '';
 	  $scope.cauTexto = '';
-	  $scope.numeroCaso ='';
+	  $scope.numeroCaso ;
+
+    $scope.estadosIncidente = ('ON HOLD SMG;ON HOLD STK;EN PROCESO;EN PAUSA;CERRADO;REGISTRADO')
+    .split(';').map(function(estado){
+        return {est: estado};
+      });
+
+    $scope.estadosPrioridad =('HIGHEST;HIGH;MEDIUM;LOW')
+    .split(';').map(function(estado){
+        return {est: estado};
+    });
+
+    var meses = ("JAN;FEB;MAR;APR;MAY;JUN;JUL;AUGUST;SEP;OCT;NOV;DEC")
+    .split(';').map(function(mes){
+        return {mes: mes}
+    });
 
     $scope.incidentes = [];
 
@@ -19,14 +48,7 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
 
     $scope.guardar = function() {
 
-      var incidente = {
-                generadoPor: $scope.generadoPor,
-                fecha: $scope.fecha,
-                estado: $scope.estado,
-                prioridad: $scope.prioridad,
-                detalle: $scope.detalle,
-                numeroCaso: $scope.numeroCaso
-            };
+    var incidente = new Incidente ($scope.generadoPor,$scope.fecha,$scope.estado,$scope.prioridad,$scope.detalle,$scope.numeroCaso);
 
       var incidenteEcontrado = $filter('filter')($scope.incidentes,{numeroCaso: $scope.numeroCaso} ,true);
 
@@ -38,14 +60,16 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
           }
 
 			$http({
-				method:'POST',
-				url:'http://192.168.0.30/insert',
-				data: incidente,
-				contentType: "application/json"
+				method:'GET',
+				//url:'http://192.168.0.30:8080/insert',
+        url:'http://localhost:8080'
+				//data: incidente,
+        //headers: {'Content-Type': 'application/json'}
+				//contentType: "application/json"
 				})
 				.then(function successCallback(response){
 
-            alert('Enviado correctamente');
+          //  alert(response.value);
 
 						});
         $scope.limpiarDatos();
@@ -74,15 +98,16 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
     $scope.limpiarDatos = function() {
         $scope._id = null;
         $scope.generadoPor = '';
-		$scope.fecha = '';
+		    $scope.fecha = '';
         $scope.estado = '';
         $scope.prioridad = '';
         $scope.detalle = '';
-		$scope.numeroCaso = '';
-		$scope.cauTexto = '';
+		    $scope.numeroCaso = '';
+		    $scope.cauTexto = '';
     };
 
 	$scope.cargar = function(){
+
 		if($scope.cauTexto != ''){
 			var inicioTexto        = $scope.cauTexto.search("El caso ha sido reportado por");
 			var findex             = 30+inicioTexto;
@@ -90,13 +115,27 @@ aplicacion.controller('Incidente',['$scope','$http','$filter',IncidenteControlle
 			$scope.generadoPor     = $scope.cauTexto.substr(findex, eindex) || '';
 			findex  				       = eindex;
 			findex 					       = $scope.cauTexto.search(" bajo el No.:");
-			$scope.numeroCaso 		 = $scope.cauTexto.substr(findex+14,6) || '';
+			$scope.numeroCaso 		 = parseInt($scope.cauTexto.substr(findex+14,6));
 			var textoBusquedaFecha = " con Fecha de apertura: ";
 			findex 					       = $scope.cauTexto.search(textoBusquedaFecha);
-			$scope.fecha 			     = $scope.cauTexto.substr(findex+textoBusquedaFecha.length,19)|| '';
-			var textoBusquedaDescr = "siguiente Descripción: ";
+			var fecha = $scope.cauTexto.substr(findex+textoBusquedaFecha.length,19)|| '';
+
+      var palabraFechas = fecha.split(' ').map(function(palabra){
+        return palabra;
+      });
+      if(palabraFechas.length){
+        var mesNumero =  $filter('filter')(fecha,{mes: palabraFechas[0]} ,true);
+        var diaNumero = palabraFechas[1];
+        var añoNumero = palabraFechas[2];
+
+        $scope.fecha = new Date(añoNumero,mesNumero,diaNumero);
+    }
+
+
+      var textoBusquedaDescr = "siguiente Descripción: ";
 			findex 					       = $scope.cauTexto.search(textoBusquedaDescr);
 			$scope.detalle		     = $scope.cauTexto.substr(findex+textoBusquedaDescr.length,$scope.cauTexto.length)|| '';
 		}
 	};
+
 };

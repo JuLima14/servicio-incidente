@@ -1,93 +1,75 @@
 <!DOCTYPE html>
-<html ng-app="aplicacion">
-    <head>
-        <meta charset="utf-8" />
-        <title> Incidentes </title>
-        <link   type="text/css"          href="./stylesheets/bootstrap.min.css" rel="stylesheet" />
-        <script type="text/javascript" src="./javascripts/angular.js"></script>
-		    <script type="text/javascript" src="./javascripts/angular-aria.min.js"></script>
-		    <script type="text/javascript" src="./javascripts/angular-animate.min.js"></script>
-        <script type="text/javascript" src="./angularjs/incidentecontroller.js"></script>
-    </head>
-    <body>
-        <div class="container" ng-controller="Incidente" >
-            <h1><u> Incidentes</u> </h1>
-            <form action="javascript:void(0);">
-                <div class="row">
-					</br>
-					<div class="span4">
-						<label> Texto del cau </label>
-						<textarea  ng-model="cauTexto" style="margin: 1px 1px 10px;max-width:850px;max-height: 140px; width: 850px; height: 140px;"></textarea>
-						<input type="submit" value="Cargar" class="btn btn-success" ng-click="cargar()"  >
-					</div>
-				</div>
-				</br>
-				<div class="row">
-					<div class="span4">
-                        <label> Numero </label>
-                        <input type="text" ng-model="numeroCaso" />
-                    </div>
-                    <div class="span4">
-                        <label> Generado por </label>
-                        <input type="text" ng-model="generadoPor" />
-                    </div>
-                    <div class="span4">
-                        <label> Fecha registro </label>
-						 <input type="text" ng-model="fecha" />
-					</div>
+<html ng-app="CombineModule" layout="column" style="height:600px" ng-cloak paddi>
 
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--<link   type="text/css" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.css" rel="stylesheet"/>-->
+  <!--<link   type="text/css"          href="https://material.angularjs.org/1.1.1/docs.css" rel="stylesheet" />-->
+  <link   type="text/css"          href="./stylesheets/angular-material.css" rel="stylesheet" />
+  <link   type="text/css"          href="./stylesheets/docs.css" rel="stylesheet" />
+  <link   type="text/css"          href="./stylesheets/center/center.css" rel="stylesheet"/>
+  <link   type="text/css"          href="./stylesheets/menubar/menubar.css" rel="stylesheet"/>
+  <link   type="text/css"          href="./stylesheets/bootstrap.min.css" rel="stylesheet"/>
+  <script type="text/javascript" src="./javascripts/angular.js"></script>
+  <script type="text/javascript" src="./javascripts/angular-animate.min.js"></script>
+  <script type="text/javascript" src="./javascripts/angular-route.min.js"></script>
+  <script type="text/javascript" src="./javascripts/angular-aria.min.js"></script>
+  <script type="text/javascript" src="./javascripts/angular-messages.min.js"></script>
+  <script type="text/javascript" src="./javascripts/svg-assets-cache.js"></script>
+  <script type="text/javascript" src="./javascripts/angular-material.js"></script>
+  <script type="text/javascript" src="./javascripts/si-table/si-table.js"></script>
+  <script type="text/javascript" src="./angularjs/models/Incidente.js"></script>
+  <script type="text/javascript" src="./angularjs/models/View.js"></script>
+  <script type="text/javascript" src="./angularjs/controllers/IncidenteController.js"></script>
+  <script type="text/javascript" src="./angularjs/controllers/HomeController.js"></script>
 
-                    <div class="span4">
-                        <label> Estado </label>
-                        <input type="text" ng-model="estado" />
-                    </div>
-                    <div class="span4">
-                        <label> Prioridad </label>
-                        <input type="text" ng-model="prioridad" />
-                    </div>
+</head>
+<body>
 
-                </div>
-				<div class="row">
-					<div class="span4">
-                        <label> Detalle </label>
-                        <textarea type="text" ng-model="detalle" style="margin: 1px 1px 10px;max-width:850px;max-height: 100px; width: 850px; height: 100px;"></textarea>
-                    </div>
-				</div>
-                <div class="row">
-                    <div class="span4">
-                        <input type="submit" value="Guardar" class="btn btn-success" ng-click="guardar()" />
-                        <input type="button" value="Limpiar" class="btn btn-danger" ng-click="limpiarDatos()" />
-                    </div>
-                </div>
-            </form>
+<div ng-controller="AppCtrl" layout="column" style="height:600px;" ng-cloak="" flex="auto">
 
-            <table class="table">
-                <thead>
-                    <tr>
-						<th> Nro </th>
-                        <th> Generado Por </th>
-                        <th> Fecha </th>
-                        <th> Estado </th>
-                        <th> Prioridad </th>
-                        <th> Detalle </th>
-                        <th>  </th>
-                        <th>  </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in incidentes">
-						<td> {{item.numeroCaso}}</td>
-                        <td> {{item.generadoPor}} </td>
-                        <td> {{item.fecha}} </td>
-                        <td> {{item.estado}} </td>
-                        <td> {{item.prioridad}} </td>
-                        <td> {{item.detalle}} </td>
+<section >
+<md-toolbar md-scroll-shrink ng-if="true">
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false" ng-click="toggleLeft()">
+      <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+    </md-button>
+    <md-button  href="#">
+      <img  src="images/LOGO_Softtek_HOME.png">
+    </md-button>
 
-                        <td> <a href="javascript:void(0);" class="btn btn-info" ng-click="recuperar($index)"> Editar </a> </td>
-                        <td> <a href="javascript:void(0);" class="btn btn-danger" ng-click="eliminar($index)"> Eliminar </a> </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </body>
+  <div/>
+</md-toolbar>
+
+</section>
+
+<section >
+<!--<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="10">-->
+<div ng-controller="LeftCtrl">
+<md-sidenav class="md-sidenav-left" md-component-id="left" >
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Menu</h1>
+      </md-toolbar>
+      <md-content layout-padding="" >
+        <md-button aria-label="" ng-click="close()" class="md-primary" hide-gt-md=""></md-button>
+            <div ng-repeat="view in listView">
+              <md-list-item>
+                <md-button class="md-raised" ng-click="go(view.id);close()">{{view.name}}</md-button>
+              </md-list-item>
+            </div>
+      </md-content>
+</md-sidenav>
+
+    <md-content  flex="auto">
+      <!--<div class="slide-animate-container" class="flex-auto"></div>-->
+      <div class="slide-animate" ng-include="selectedView.url" ></div>
+    </md-content>
+</div>
+</section>
+</div>
+</body>
 </html>
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+-->

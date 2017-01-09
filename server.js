@@ -55,7 +55,6 @@ router.use(function(req, res, next) {
 router.route('/').get(function(req, res) {
     res.sendFile('public/index.html' , { root : __dirname});
 });
-
 router.route('/getip').get(function(req,res){
   res.json({ip:ip.address()});
 });

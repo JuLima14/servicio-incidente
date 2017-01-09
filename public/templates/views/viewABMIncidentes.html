@@ -1,0 +1,124 @@
+<!--https://github.com/simplicitylabs/si-table-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title text="Incidentes"> Incidentes </title>
+    </head>
+<body>
+<md-content  layout-gt-sm="row" layout-padding ng-controller="IncidenteController" md-theme="" ng-app="IncidenteModule">
+
+  <form action="incidenteForm" >
+    <h5 class="md-toolbar-tools">Incidentes </h5>
+      </hr>
+        <md-content  layout-gt-sm="row" layout-padding>
+					<md-input-container>
+						<label> Texto del cau </label>
+						<textarea  ng-model="cauTexto" rows="5" style="margin: 1px 1px 10px;min-height:140px; max-width:850px;max-height: 140px; width: 850px; height: 100px;" md-select-on-focus></textarea>
+          </md-input-container>
+        </md-content>
+
+      <md-input-container>
+        <md-button ng-click="cargar()" class="md-raised ">Cargar</md-button>
+      </md-input-container>
+
+   <md-content  layout-gt-sm="row" layout-padding>
+        <md-input-container>
+            <label>Numero</label>
+            <input type="number"  ng-model="numeroCaso">
+        </md-input-container>
+        <md-input-container>
+          <label> Generado por </label>
+          <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+          <input type="text" ng-model="generadoPor" />
+      </md-input-container>
+      <md-input-container>
+        <label> Fecha registro </label>
+        <!--<input type="text" ng-model="fecha" />-->
+        <md-datepicker ng-model="fecha"></md-datepicker>
+      </md-input-container>
+   </md-content>
+<md-content  layout-gt-sm="row" layout-padding>
+    <md-input-container>
+      <label> Estado </label>
+      <md-select ng-model="estado">
+              <md-option ng-repeat="est in estadosIncidente" value="{{est.est}}">
+                {{est.est}}
+              </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container>
+      <label> Prioridad </label>
+      <md-select ng-model="prioridad">
+              <md-option ng-repeat="est in estadosPrioridad" value="{{est.est}}">
+                {{est.est}}
+              </md-option>
+      </md-select>
+    </md-input-container>
+  </md-content>
+<md-content  layout-gt-sm="row" layout-padding>
+    <md-input-container class="md-block">
+        <label> Detalle </label>
+       <textarea ng-model="detalle" rows="5"  style="margin: 1px 1px 10px;min-height:140px;max-width:850px;max-height: 100px; width: 850px; height: 100px;" md-select-on-focus></textarea>
+    </md-input-container>
+</md-content>
+
+<md-content  layout-gt-sm="row" layout-padding>
+  <md-input-container  layout-gt-sm="row" layout-padding>
+    <md-button ng-click="guardar();showActionToast()" class="md-raised">Guardar</md-button>
+    <md-button ng-click="limpiarDatos()" class="md-raised">Limpiar</md-button>
+  </md-input-containter>
+</md-content>
+
+<md-content layout-gt-sm="row">
+<md-input-container>
+<input disabled placeholder="  " style="margin: 1px 1px 10px;max-width:1000px; width: 1000px;" >
+</md-input-containter>
+</md-content>
+
+          <md-input-container>
+            <label>Filtro</label>
+            <input type="text" ng-model="filter.$" >
+          </md-input-containter>
+
+            <table class="table" si-table>
+                <thead>
+                    <tr >
+						            <th sort-by="number"> # </th>
+                        <th sort-by="generadoPor"> Generado Por </th>
+                        <th sort-by="fecha"> Fecha </th>
+                        <th sort-by="estado"> Estado </th>
+                        <th sort-by="prioridad"> Prioridad </th>
+                        <th sort-by="detalle"> Detalle </th>
+                        <th>  </th>
+                        <th>  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in incidentes | filter:filter">
+						            <td> {{item.numeroCaso}}</td>
+                        <td> {{item.generadoPor}} </td>
+                        <td> {{item.fecha}} </td>
+                        <td> {{item.estado}} </td>
+                        <td> {{item.prioridad}} </td>
+                        <td> {{item.detalle}} </td>
+                        <td><md-button ng-click="recuperar($index)" class="md-raised">Editar</md-button></td>
+                        <td><md-button ng-click="eliminar($index)" class="md-raised">Eliminar</md-button></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="5">
+                      <si-table-pagination limit="2" />
+                    </td>
+                  </tr>
+                </tfoot>
+             </table>
+
+        <div class="alert alert-info" ng-if="!incidentes">
+          Cargando ...
+        </div>
+
+  </form>
+    </body>
+</html>
