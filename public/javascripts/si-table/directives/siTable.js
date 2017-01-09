@@ -1,4 +1,4 @@
-/**
+ /**
 * SiTable (main) Directive
 *
 * The directive adds a controller to the table element, which can be used in
