@@ -134,7 +134,7 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
         var diaNumero = palabraFechas[1];
         var añoNumero = palabraFechas[2];
 
-        $scope.fecha ="tortugato";
+        $scope.fecha =new Date(añoNumero,mesNumero,diaNumero);
     }
 
 
