@@ -11,8 +11,8 @@ function Incidente(generadoPor,fecha,estado,prioridad,detalle,numeroCaso){
           this.numeroCaso = numeroCaso;
           
           this.fecha.getFecha = function(){
-          return this.fecha;
-          }
+                     return this.fecha;
+          };
       }
 
 
