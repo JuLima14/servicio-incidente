@@ -135,7 +135,6 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
         var añoNumero = palabraFechas[2];
 
         $scope.fecha =new Date(añoNumero+"/"+mesNumero+"/"+diaNumero);
-	     $scope.fecha.toLocaleFormat('%d-%b-%Y');
     }
 
       var textoBusquedaDescr = "siguiente Descripción: ";
