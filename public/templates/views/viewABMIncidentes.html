@@ -98,7 +98,7 @@
                     <tr ng-repeat="item in incidentes | filter:filter">
 						            <td> {{item.numeroCaso}}</td>
                         <td> {{item.generadoPor}} </td>
-                        <td> {{item.fecha}} </td>
+                        <td> {{item.fecha.getFecha}} </td>
                         <td> {{item.estado}} </td>
                         <td> {{item.prioridad}} </td>
                         <td> {{item.detalle}} </td>
