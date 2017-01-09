@@ -1,5 +1,44 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html ng-app="CombineModule" layout="column" style="height:600px" ng-cloak paddi>
+=======
+<html ng-app="aplicacion">
+    <head>
+        <meta charset="utf-8" />
+        <title> Incidentes </title>
+        <link   type="text/css"          href="./stylesheets/bootstrap.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="./javascripts/angular.js"></script>
+		    <script type="text/javascript" src="./javascripts/angular-aria.min.js"></script>
+		    <script type="text/javascript" src="./javascripts/angular-animate.min.js"></script>
+        <script type="text/javascript" src="./angularjs/incidentecontroller.js"></script>
+    </head>
+    <body>
+        <div class="container" ng-controller="Incidente" >
+            <h1><u> Incidentes</u> </h1>
+            <form action="javascript:void(0);">
+                <div class="row">
+					</br>
+					<div class="span4">
+						<label> Texto del cau </label>
+						<textarea  ng-model="cauTexto" style="margin: 1px 1px 10px;max-width:850px;max-height: 140px; width: 850px; height: 140px;"></textarea>
+						<input type="submit" value="Cargar" class="btn btn-success" ng-click="cargar()"  >
+					</div>
+				</div>
+				</br>
+				<div class="row">
+					<div class="span4">
+                        <label> Numero </label>
+                        <input type="number" ng-model="numeroCaso" />
+                    </div>
+                    <div class="span4">
+                        <label> Generado por </label>
+                        <input type="text" ng-model="generadoPor" />
+                    </div>
+                    <div class="span4">
+                        <label> Fecha registro </label>
+						 <input type="text" ng-model="fecha" />
+					</div>
+>>>>>>> origin/master
 
 <head>
   <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
@@ -29,6 +68,7 @@
 
 <div ng-controller="AppCtrl" layout="column" style="height:600px;" ng-cloak="" flex="auto">
 
+<<<<<<< HEAD
 <section >
 <md-toolbar md-scroll-shrink ng-if="true">
   <div class="md-toolbar-tools">
@@ -38,6 +78,29 @@
     <md-button  href="#">
       <img  src="images/LOGO_Softtek_HOME.png">
     </md-button>
+=======
+            <table class="table">
+                <thead>
+                    <tr><th><input type="submit" value="Cargar" class="btn btn-success" ng-click="cargarIncidentes()"  ></th>
+						            <th> Nro </th>
+                        <th> Generado Por </th>
+                        <th> Fecha </th>
+                        <th> Estado </th>
+                        <th> Prioridad </th>
+                        <th> Detalle </th>
+                        <th>  </th>
+                        <th>  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in incidentes">
+						<td> {{item.numeroCaso}}</td>
+                        <td> {{item.generadoPor}} </td>
+                        <td> {{item.fecha}} </td>
+                        <td> {{item.estado}} </td>
+                        <td> {{item.prioridad}} </td>
+                        <td> {{item.detalle}} </td>
+>>>>>>> origin/master
 
   <div/>
 </md-toolbar>

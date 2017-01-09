@@ -47,6 +47,8 @@ var router = express.Router();
 // middleware cada vez que se invoca un servicio pasa por aca
 router.use(function(req, res, next) {
     console.log('Servicio invocado.');
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next(); // se usa para continuar a la ruta que fue invocada sino queda aca
 });
 
@@ -58,6 +60,8 @@ router.route('/').get(function(req, res) {
 router.route('/getip').get(function(req,res){
   res.json({ip:ip.address()});
 });
+router.route('/createtable').get(IncidenteServiceImpl.createTable);
+router.route('/deletetable').get(IncidenteServiceImpl.deleteTable);
 router.route('/getall').get(IncidenteServiceImpl.getAll);
 router.route('/insert').post(IncidenteServiceImpl.insert);
 //router.route('/getbyid/:id').get(IncidenteServiceImpl.getById);
