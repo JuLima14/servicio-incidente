@@ -1,5 +1,6 @@
 
-var IncidenteModule = angular.module('IncidenteModule', ['ngMaterial', 'ngMessages']);
+//var IncidenteModule = angular.module('IncidenteModule', ['ngMaterial', 'ngMessages']);
+var IncidenteModule = angular.module('IncidenteModule');
 
 //IncidenteModule.controller('ToastCtrl', ['$scope',' $mdToast',ToastCtrl]);
 IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',IncidenteController])
@@ -16,7 +17,7 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
 
   });
 
- function IncidenteController($scope,$http,$filter, $mdToast) {
+ function IncidenteController($scope,$http,$filter) {
 
     $scope._id = null;
     $scope.generadoPor = '';
@@ -43,8 +44,6 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
     });
 
     $scope.incidentes = [];
-
-
 
     $scope.guardar = function() {
 

@@ -1,44 +1,34 @@
-
+'use strict';
 //ACA SE CARGAN TODOS LOS CONTROLLERS
-angular.module("CombineModule", ["HomeModule", "IncidenteModule"]);
+//angular.module("CombineModule", ["HomeModule", "IncidenteModule"]);
 
 
-var app = angular.module('HomeModule',['ngAnimate','ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
+//var app = angular.module('HomeModule',['ngAnimate','ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
+var app = angular.module('HomeModule');
 
-  app.filter('keyboardShortcut', function($window) {
-    return function(str) {
-      if (!str) return;
-      var keys = str.split('-');
-      var isOSX = /Mac OS X/.test($window.navigator.userAgent);
+app.controller('HomeController',['$scope', '$timeout', '$mdSidenav', '$log','$filter',HomeController])
+.config(function($mdThemingProvider) {
+    // Configure a dark theme with primary foreground yellow
+    $mdThemingProvider.theme('docs-dark', 'default')
+      .primaryPalette('blue')
+      .dark();
 
-      var seperator = (!isOSX || keys.length > 2) ? '+' : '';
-
-      var abbreviations = {
-        M: isOSX ? '⌘' : 'Ctrl',
-        A: isOSX ? 'Option' : 'Alt',
-        S: 'Shift'
-      };
-
-      return keys.map(function(key, index) {
-        var last = index == keys.length - 1;
-        return last ? key : abbreviations[key];
-      }).join(seperator);
-    };
   });
 
-app.controller('AppCtrl',['$scope', '$timeout', '$mdSidenav', '$log',AppCtrl]);
-
-  function AppCtrl($scope, $timeout, $mdSidenav, $log){
+  function HomeController($scope, $timeout, $mdSidenav, $log,$filter, $templateRequest, $sce, $compile){
     $scope.toggleLeft = buildDelayedToggler('left');
     $scope.toggleRight = buildToggler('right');
-    /*$scope.isOpenRight = function(){
-      return $mdSidenav('right').isOpen();
-    };*/
 
-    /**
-     * Supplies a function that will continue to operate until the
-     * time is up.
-     */
+    $scope.listView = [];
+    $scope.selectedView;
+
+    $scope.listView.push(new View(0,"ABM Incidentes","aplicacion/modules/abm-incidentes/views/viewABMIncidentes.html"));
+    $scope.listView.push(new View(1,"Casos abiertos","aplicacion/modules/abm-incidentes/views/viewABMIncidentes.html"));
+    $scope.listView.push(new View(2,"Carga de horas","file.html"));
+
+    $scope.selectedView = $scope.listView[0];
+
+
     function debounce(func, wait, context) {
       var timer;
 
@@ -78,23 +68,31 @@ app.controller('AppCtrl',['$scope', '$timeout', '$mdSidenav', '$log',AppCtrl]);
           });
       }
     }
+        $scope.go = function(id){
+              $scope.selectedView = $scope.listView[id];
+        };
+
+        $scope.close = function() {
+          // Component lookup should always be available since we are not using `ng-if`
+          $mdSidenav('left').close()
+            .then(function () {
+              $log.debug("close LEFT is done");
+            });
+
+        };
+
+
   };
-
+/*
   app.controller('LeftCtrl',['$scope', '$timeout', '$mdSidenav', '$log','$filter',LeftCtrl])
-  .config(function($mdThemingProvider) {
-      // Configure a dark theme with primary foreground yellow
-      $mdThemingProvider.theme('docs-dark', 'default')
-        .primaryPalette('blue')
-        .dark();
 
-    });
 
   function LeftCtrl($scope, $timeout, $mdSidenav, $log,$filter, $templateRequest, $sce, $compile){
     $scope.listView = [];
     $scope.selectedView;
 
-    $scope.listView.push(new View(0,"ABM Incidentes","templates/views/viewABMIncidentes.html"));
-    $scope.listView.push(new View(1,"Casos abiertos","templates/views/viewABMIncidentes.html"));
+    $scope.listView.push(new View(0,"ABM Incidentes","modules/abm-incidentes/views/viewABMIncidentes.html"));
+    $scope.listView.push(new View(1,"Casos abiertos","modules/abm-incidentes/views/viewABMIncidentes.html"));
     $scope.listView.push(new View(2,"Carga de horas","file.html"));
 
     $scope.selectedView = $scope.listView[0];
@@ -116,7 +114,7 @@ app.controller('AppCtrl',['$scope', '$timeout', '$mdSidenav', '$log',AppCtrl]);
     };
   };
 
-
+*/
 
 /**
 Copyright 2016 Google Inc. All Rights Reserved.
