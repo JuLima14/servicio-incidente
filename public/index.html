@@ -1,75 +1,56 @@
 <!DOCTYPE html>
-<html ng-app="CombineModule" layout="column" style="height:600px" ng-cloak paddi>
-<head>
-  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-  <link href="./stylesheets/material+icons" rel="stylesheet">
-  <!--<link   type="text/css" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.css" rel="stylesheet"/>-->
-  <!--<link   type="text/css"          href="https://material.angularjs.org/1.1.1/docs.css" rel="stylesheet" />-->
-  <link   type="text/css"          href="./stylesheets/angular-material.css" rel="stylesheet" />
-  <link   type="text/css"          href="./stylesheets/docs.css" rel="stylesheet" />
-  <link   type="text/css"          href="./stylesheets/center/center.css" rel="stylesheet"/>
-  <link   type="text/css"          href="./stylesheets/menubar/menubar.css" rel="stylesheet"/>
-  <link   type="text/css"          href="./stylesheets/bootstrap.min.css" rel="stylesheet"/>
-  <script type="text/javascript" src="./javascripts/angular.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-animate.min.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-route.min.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-aria.min.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-messages.min.js"></script>
-  <script type="text/javascript" src="./javascripts/svg-assets-cache.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-material.js"></script>
-  <script type="text/javascript" src="./javascripts/si-table/si-table.js"></script>
-  <script type="text/javascript" src="./angularjs/models/Incidente.js"></script>
-  <script type="text/javascript" src="./angularjs/models/View.js"></script>
-  <script type="text/javascript" src="./angularjs/controllers/IncidenteController.js"></script>
-  <script type="text/javascript" src="./angularjs/controllers/HomeController.js"></script>
+<html ng-app="HttpAuthModule">
 
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link   type="text/css"          href="stylesheets/angular-material.css" rel="stylesheet" />
+    <link   type="text/css"          href="stylesheets/docs.css" rel="stylesheet" />
+    <link   type="text/css"          href="stylesheets/center/center.css" rel="stylesheet"/>
+    <link   type="text/css"          href="stylesheets/menubar/menubar.css" rel="stylesheet"/>
+    <link   type="text/css"          href="stylesheets/bootstrap.min.css" rel="stylesheet"/>
+  </head>
 
-<div ng-controller="AppCtrl" layout="column" style="height:600px;" ng-cloak="" flex="auto">
+  <body>
 
-<section >
-<md-toolbar md-scroll-shrink ng-if="true">
-  <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false" ng-click="toggleLeft()">
-      <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
-    </md-button>
-    <md-button  href="#">
-      <img  src="images/LOGO_Softtek_HOME.png">
-    </md-button>
+        <div class="alert alert-info" style="max-width: 200px;margin: 10 auto 29px;border-radius: 8px;"  ng-if="window.location.hash == '#/login'">
+          <div ng-view></div>
+        </div>
+        <div  ng-if="window.location.hash != '#/login'">
+          <div ng-view></div>
+        </div>
+      <!--  <div ng-if="(window.location.hash=='#/')?true:false">
+          <div ng-view flex="auto"></div>
+        </div>-->
 
-  <div/>
-</md-toolbar>
+ 
 
-</section>
+    <script type="text/javascript" src="libraries/jquery-2.0.3.min.js"></script>
 
-<section >
-<!--<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="10">-->
-<div ng-controller="LeftCtrl">
-<md-sidenav class="md-sidenav-left" md-component-id="left" >
-      <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Menu</h1>
-      </md-toolbar>
-      <md-content layout-padding="" >
-        <md-button aria-label="" ng-click="close()" class="md-primary" hide-gt-md=""></md-button>
-            <div ng-repeat="view in listView">
-              <md-list-item>
-                <md-button class="md-raised" ng-click="go(view.id);close()">{{view.name}}</md-button>
-              </md-list-item>
-            </div>
-      </md-content>
-</md-sidenav>
+    <script type="text/javascript" src="libraries/angular.js"></script>
+    <script type="text/javascript" src="libraries/angular-animate.min.js"></script>
+    <script type="text/javascript" src="libraries/angular-route.min.js"></script>
+    <script type="text/javascript" src="libraries/angular-aria.min.js"></script>
+    <script type="text/javascript" src="libraries/angular-messages.min.js"></script>
+    <script type="text/javascript" src="libraries/angular-cookies.js"></script>
+    <script type="text/javascript" src="libraries/svg-assets-cache.js"></script>
+    <script type="text/javascript" src="libraries/angular-material.js"></script>
+    <script type="text/javascript" src="libraries/si-table/si-table.js"></script>
 
-    <md-content  flex="auto">
-      <!--<div class="slide-animate-container" class="flex-auto"></div>-->
-      <div class="slide-animate" ng-include="selectedView.url" ></div>
-    </md-content>
-</div>
-</section>
-</div>
-</body>
+
+    <!--Se cargan las clases a utilizar-->
+    <script type="text/javascript" src="models/Incidente.js"></script>
+    <script type="text/javascript" src="models/View.js"></script>
+    <!--Se cargan la app-->
+    <script src="app.js"></script>
+    <!--Se cargan los controllers de el proyecto login-->
+    <script src="login/modules/authentication/AuthenticationServices.js"></script>
+    <script src="login/modules/authentication/AuthenticationController.js"></script>
+    <!--Se cargan los controllers de el proyecto aplicacion-->
+    <script type="text/javascript" src="aplicacion/modules/home/HomeController.js"></script>
+    <script type="text/javascript" src="aplicacion/modules/abm-incidentes/IncidenteController.js"></script>
+
+  </body>
+
 </html>
-<!--
-Copyright 2016 Google Inc. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
--->
