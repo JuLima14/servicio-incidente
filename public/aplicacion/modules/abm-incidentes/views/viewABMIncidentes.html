@@ -1,20 +1,20 @@
 <!--https://github.com/simplicitylabs/si-table-->
 <!DOCTYPE html>
-<html ng-controller="IncidenteController" >
+<html >
     <head>
         <meta charset="utf-8" />
         <title text="Incidentes"> Incidentes </title>
     </head>
 <body>
-<md-content  layout-gt-sm="row" layout-padding md-theme="">
+<md-content ng-controller="IncidenteController" layout-gt-sm="row" layout-padding md-theme="">
 
   <form action="incidenteForm" >
-    <h5 class="md-toolbar-tools">Incidentes </h5>
+    <!--<h5 class="md-toolbar-tools">Incidentes </h5>-->
       </hr>
         <md-content  layout-gt-sm="row" layout-padding>
 					<md-input-container>
 						<label> Texto del cau </label>
-						<textarea  ng-model="cauTexto" rows="5" style="margin: 1px 1px 10px;min-height:140px; max-width:850px;max-height: 140px; width: 850px; height: 100px;" md-select-on-focus></textarea>
+						<textarea  ng-model="cauTexto" rows="5" style="margin: 1px 1px 10px;min-height:140px; max-width:850px;max-height: 140px; width: 850px; height: 100px;overflow-y:scroll" md-no-autogrow></textarea>
           </md-input-container>
         </md-content>
 
@@ -59,7 +59,7 @@
 <md-content  layout-gt-sm="row" layout-padding>
     <md-input-container class="md-block">
         <label> Detalle </label>
-       <textarea ng-model="detalle" rows="5"  style="margin: 1px 1px 10px;min-height:140px;max-width:850px;max-height: 100px; width: 850px; height: 100px;" md-select-on-focus></textarea>
+       <textarea ng-model="detalle" rows="5"  style="margin: 1px 1px 10px;min-height:140px;max-width:850px;max-height: 100px; width: 850px; height: 100px;overflow-y:scroll" ></textarea>
     </md-input-container>
 </md-content>
 
@@ -102,8 +102,8 @@
                         <td> {{item.estado}} </td>
                         <td> {{item.prioridad}} </td>
                         <td> {{item.detalle}} </td>
-                        <td><md-button ng-click="recuperar($index)" class="md-raised">Editar</md-button></td>
-                        <td><md-button ng-click="eliminar($index)" class="md-raised">Eliminar</md-button></td>
+                        <td><md-button ng-click="recuperar($index)" class="md-raised md-primary">Editar</md-button></td>
+                        <td><md-button ng-click="eliminar($index)" class="md-raised md-warn">Eliminar</md-button></td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -116,9 +116,9 @@
              </table>
 
         <div class="alert alert-info" ng-if="!incidentes">
-          Cargando ...
+          Sin incidentes ...
         </div>
-
   </form>
+</md-content>
     </body>
 </html>

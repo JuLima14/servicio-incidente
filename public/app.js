@@ -1,10 +1,10 @@
-'use strict';
+// declare modules of APLICACION
+angular.module('IncidenteModule',['ngAnimate','ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
+angular.module('HomeModule', ['IncidenteModule']);
 //declare modules of LOGIN
 angular.module('AuthenticationModule', []);
 angular.module('HttpAuthModule', ['AuthenticationModule','HomeModule','ngRoute','ngCookies'])
-// declare modules of APLICACION
-angular.module('HomeModule', ['ngAnimate','ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
-angular.module('IncidenteModule',['HomeModule']);
+
 
 
 //BasicHttpAuthExample
