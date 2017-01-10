@@ -1,6 +1,6 @@
  /**
 * Pagination filter
-*
+* 
 * Responsible for making sure we display only the items which the pagination
 * params dictate.
 *

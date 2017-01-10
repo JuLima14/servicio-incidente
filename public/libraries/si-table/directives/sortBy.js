@@ -1,4 +1,4 @@
- /**
+/**
 * SortBy Directive
 *
 * Add sorting interface to TH elements which have the `sortBy` attribute on

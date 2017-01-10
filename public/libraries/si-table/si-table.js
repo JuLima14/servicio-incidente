@@ -1,4 +1,4 @@
- angular.module('siTable.directives', []);
+angular.module('siTable.directives', []);
 angular.module('siTable.filters', []);
 angular.module('siTable',
 [

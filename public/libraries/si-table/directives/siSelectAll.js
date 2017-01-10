@@ -1,4 +1,4 @@
- /**
+/**
 * Select All Directive
 *
 * Checkbox which toggles 'selected' property of each array element

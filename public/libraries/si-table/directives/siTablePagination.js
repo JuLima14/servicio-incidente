@@ -1,4 +1,4 @@
- /**
+/**
 * Pagination Directive
 *
 * Put this somewhere in side the table to add pagination to the table data.
