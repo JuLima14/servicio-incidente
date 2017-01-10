@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 //ACA SE CARGAN TODOS LOS CONTROLLERS
 //angular.module("CombineModule", ["HomeModule", "IncidenteModule"]);
 

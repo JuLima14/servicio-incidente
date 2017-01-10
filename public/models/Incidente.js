@@ -1,4 +1,4 @@
-
+ 
 function Incidente(generadoPor,fecha,estado,prioridad,detalle,numeroCaso){
           this.generadoPor = generadoPor;
           this.fecha = fecha;
