@@ -59,7 +59,11 @@
         <md-button aria-label="" ng-click="close()" class="md-primary" hide-gt-md=""></md-button>
             <div ng-repeat="view in listView">
               <md-list-item>
-                <md-button class="md-raised" ng-click="go(view.id);close()">{{view.name}}</md-button>
+               <div class="md-list-item-text">
+                <h3 class="md-primary" ng-click="go(view.id)">{{view.name}}</h3>
+               </div>
+               
+                <!--<md-button class="md-raised" ng-click="go(view.id);close()">{{view.name}}</md-button>-->
               </md-list-item>
             </div>
       </md-content>
