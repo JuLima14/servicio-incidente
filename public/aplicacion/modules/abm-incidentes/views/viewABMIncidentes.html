@@ -12,14 +12,14 @@
     <!--<h5 class="md-toolbar-tools">Incidentes </h5>-->
       </hr>
         <md-content  layout-gt-sm="row" layout-padding>
-					<md-input-container>
-						<label> Texto del cau </label>
-						<textarea  ng-model="cauTexto" rows="5" style="margin: 1px 1px 10px;min-height:140px; max-width:850px;max-height: 140px; width: 850px; height: 100px;overflow-y:scroll" md-no-autogrow></textarea>
+	  <md-input-container>
+		<label> Texto del cau </label>
+		<textarea  ng-model="cauTexto" rows="5" style="margin: 1px 1px 10px;min-height:140px; max-width:850px;max-height: 140px; width: 850px; height: 100px;overflow-y:scroll" md-no-autogrow></textarea>
           </md-input-container>
         </md-content>
 
       <md-input-container layout-padding>
-        <md-button ng-click="cargar()" class="md-raised md-primary">Cargar</md-button>
+        	<md-button ng-click="cargar()" class="md-raised md-primary">Cargar</md-button>
       </md-input-container>
 
    <md-content  layout-gt-sm="row" layout-padding>
@@ -29,7 +29,6 @@
         </md-input-container>
         <md-input-container>
           <label> Generado por </label>
-          <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
           <input type="text" ng-model="generadoPor" />
       </md-input-container>
 
