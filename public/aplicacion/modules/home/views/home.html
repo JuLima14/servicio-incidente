@@ -28,16 +28,16 @@
 
 <div  layout="column" style="height:600px;" ng-cloak flex="auto">
 
-<section class="md-hue-2">
+<section>
  <!--md-scroll-shrink ng-if="true"-->
-<md-toolbar class="md-hue-2">
+<md-toolbar class="md-hue-2 md-theme-indigo">
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false" ng-click="toggleLeft()">
       <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
     </md-button>
-    <!-- <md-button> href="#/login">
-        <img class="md-raised" src="images/LOGO_Softtek_HOME.png">
-     </md-button> -->
+     <md-button> href="#/login">
+        <img class="md-toolbar-tools md-raised" src="images/LOGO_Softtek_HOME.png">
+     </md-button>
       <h2 class="md-toolbar-tools">
         <span class="md-flex">{{selectedView.name}}</span>
       </h2>
