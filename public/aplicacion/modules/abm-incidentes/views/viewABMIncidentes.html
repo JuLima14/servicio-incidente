@@ -32,30 +32,36 @@
           <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
           <input type="text" ng-model="generadoPor" />
       </md-input-container>
+
+      <md-input-container>
+      	<label> Estado </label>
+      	<md-select ng-model="estado">
+              <md-option ng-repeat="est in estadosIncidente" value="{{est.est}}">
+                {{est.est}}
+              </md-option>
+      	</md-select>
+    </md-input-container>
+	   
+    <md-input-container>
+      	<label> Prioridad </label>
+      	<md-select ng-model="prioridad">
+              <md-option ng-repeat="est in estadosPrioridad" value="{{est.est}}">
+                {{est.est}}
+              </md-option>
+      	</md-select>
+    </md-input-container> 
+
+	   
+	   
+   </md-content>
+   <md-content  layout-gt-sm="row" layout-padding>
       <md-input-container>
         <label> Fecha registro </label>
         <!--<input type="text" ng-model="fecha" />-->
         <md-datepicker ng-model="fecha"></md-datepicker>
       </md-input-container>
    </md-content>
-<md-content  layout-gt-sm="row" layout-padding>
-    <md-input-container>
-      <label> Estado </label>
-      <md-select ng-model="estado">
-              <md-option ng-repeat="est in estadosIncidente" value="{{est.est}}">
-                {{est.est}}
-              </md-option>
-      </md-select>
-    </md-input-container>
-    <md-input-container>
-      <label> Prioridad </label>
-      <md-select ng-model="prioridad">
-              <md-option ng-repeat="est in estadosPrioridad" value="{{est.est}}">
-                {{est.est}}
-              </md-option>
-      </md-select>
-    </md-input-container>
-  </md-content>
+	
 <md-content  layout-gt-sm="row" layout-padding>
     <md-input-container class="md-block">
         <label> Detalle </label>
