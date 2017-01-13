@@ -1,82 +1,61 @@
  <!DOCTYPE html>
 <html ng-app="HomeModule" layout="column" style="height:600px" ng-cloak paddi>
 <head>
-  <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-<!--  <link href="./stylesheets/material+icons" rel="stylesheet">-->
-  <!--<link   type="text/css" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.css" rel="stylesheet"/>-->
-  <!--<link   type="text/css"          href="https://material.angularjs.org/1.1.1/docs.css" rel="stylesheet" />-->
-<!--  <link   type="text/css"          href="./stylesheets/angular-material.css" rel="stylesheet" />
-  <link   type="text/css"          href="./stylesheets/docs.css" rel="stylesheet" />
-  <link   type="text/css"          href="./stylesheets/center/center.css" rel="stylesheet"/>
-  <link   type="text/css"          href="./stylesheets/menubar/menubar.css" rel="stylesheet"/>
-  <link   type="text/css"          href="./stylesheets/bootstrap.min.css" rel="stylesheet"/>
-  <script type="text/javascript" src="./javascripts/angular.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-animate.min.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-route.min.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-aria.min.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-messages.min.js"></script>
-  <script type="text/javascript" src="./javascripts/svg-assets-cache.js"></script>
-  <script type="text/javascript" src="./javascripts/angular-material.js"></script>
-  <script type="text/javascript" src="./javascripts/si-table/si-table.js"></script>
-  <script type="text/javascript" src="./angularjs/models/Incidente.js"></script>
-  <script type="text/javascript" src="./angularjs/models/View.js"></script>
-  <script type="text/javascript" src="./angularjs/controllers/IncidenteController.js"></script>
-  <script type="text/javascript" src="./angularjs/controllers/HomeController.js"></script>-->
 
 </head>
 <body ng-controller="HomeController">
 
 <div  layout="column" style="height:600px;" ng-cloak flex="auto">
 
+
 <section>
- <!--md-scroll-shrink ng-if="true"-->
-<md-toolbar class="md-hue-2 md-theme-indigo">
+<md-toolbar md-scroll-shrink ng-if="true">
   <div class="md-toolbar-tools">
     <md-button class="md-icon-button" aria-label="Settings" ng-disabled="false" ng-click="toggleLeft()">
       <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
     </md-button>
-      <h2 align="center" class="md-toolbar-tools">
-        <span class="md-flex">{{selectedView.name}}</span>
-      </h2>
-    <md-button href="#/login">
-        <img class="md-toolbar-tools md-raised" src="images/LOGO_Softtek_HOME.png">
-     </md-button>
-   <span flex></span>
-       <md-button class="md-icon-button" aria-label="Favorite">
-          <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-          <!--<md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>-->
-       </md-button>
+
+    <div class="md-icon-button" aria-label="More">
+      <img  src="images/LOGO_Softtek_HOME.png">
+    </div>
+
+      <h5 class="md-toolbar-tools">{{selectedView.name}}</h5>
+
+      <md-button href="#/login" class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>
+      </md-button>
   <div/>
 </md-toolbar>
-
 </section>
 
-<section >
+
+
 <!--<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="10">-->
-<div>
-<md-sidenav class="md-sidenav-left" md-component-id="left" >
+
+<section>
+<md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="10">
       <md-toolbar class="md-theme-indigo">
         <h1 class="md-toolbar-tools">Menu</h1>
       </md-toolbar>
-      <md-content layout-padding="" >
-        <md-button aria-label="" ng-click="close()" class="md-primary" hide-gt-md=""></md-button>
-            <div ng-repeat="view in listView">
-              <md-list-item>
-               <div class="md-list-item-text">
-                <h3 class="md-primary" ng-click="go(view.id)">{{view.name}}</h3>
-               </div>
-               
-                <!--<md-button class="md-raised" ng-click="go(view.id);close()">{{view.name}}</md-button>-->
-              </md-list-item>
-            </div>
-      </md-content>
+  <md-content>
+    <md-list>
+      <md-list-item class="md-3-line" ng-repeat="view in listView">
+        <div class="md-list-item-text md-button slide-animate" ng-click="go(view.id);close()">
+          <h5>{{view.name}}</h5>
+        </div>
+        <md-divider></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-content>
 </md-sidenav>
-
-    <md-content  flex="auto">
-      <div class="slide-animate" ng-include="selectedView.url" ></div>
-    </md-content>
-</div>
 </section>
+
+<section>
+    <md-content  flex="auto">
+      <div ng-include="selectedView.url" ></div>
+    </md-content>
+</section>
+
 </div>
 </body>
 </html>

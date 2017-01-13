@@ -16,8 +16,9 @@ app.controller('HomeController',['$scope', '$timeout', '$mdSidenav', '$log','$fi
   });
 
   function HomeController($scope, $timeout, $mdSidenav, $log,$filter, $templateRequest, $sce, $compile){
-    $scope.toggleLeft = buildDelayedToggler('left');
-    $scope.toggleRight = buildToggler('right');
+    //$scope.toggleLeft = buildDelayedToggler('left');
+    $scope.toggleLeft = buildToggler('left');
+    //$scope.toggleRight = buildToggler('right');
 
     $scope.listView = [];
     $scope.selectedView;

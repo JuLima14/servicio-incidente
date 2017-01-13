@@ -1,4 +1,4 @@
- 
+
 //var IncidenteModule = angular.module('IncidenteModule', ['ngMaterial', 'ngMessages']);
 var IncidenteModule = angular.module('IncidenteModule');
 
@@ -7,13 +7,13 @@ IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',Inc
 .config(function($mdThemingProvider) {
 
     // Configure a dark theme with primary foreground yellow
-    $mdThemingProvider.theme('docs-dark', 'default')
+    /*$mdThemingProvider.theme('docs-dark', 'default')
       .primaryPalette('blue')
       .dark();
 
     $mdThemingProvider.theme('docs-light', 'default')
-        .primaryPalette('blue')
-        .dark();
+        .primaryPalette('')
+        .dark();*/
 
   });
 
