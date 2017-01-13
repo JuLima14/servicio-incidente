@@ -1,9 +1,9 @@
 
 //var IncidenteModule = angular.module('IncidenteModule', ['ngMaterial', 'ngMessages']);
-var IncidenteModule = angular.module('IncidenteModule');
+var AbmIncidenteModule = angular.module('AbmIncidenteModule');
 
 //IncidenteModule.controller('ToastCtrl', ['$scope',' $mdToast',ToastCtrl]);
-IncidenteModule.controller('IncidenteController',['$scope','$http','$filter',IncidenteController])
+AbmIncidenteModule.controller('IncidenteController',['$scope','$http','$filter',IncidenteController])
 .config(function($mdThemingProvider) {
 
     // Configure a dark theme with primary foreground yellow
@@ -147,7 +147,7 @@ $scope.cargarIncidentes = function (){
   $http({
     method:'GET',
     //url:'http://172.16.82.29:8080/getall',
-      url:'http://servicio-incidente.herokuapp.com/getall',
+      //url:'http://servicio-incidente.herokuapp.com/getall',
     dataType: "application/json"
     })
     .then(function successCallback(response){

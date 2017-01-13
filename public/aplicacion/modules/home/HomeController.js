@@ -1,7 +1,3 @@
- 'use strict';
-//ACA SE CARGAN TODOS LOS CONTROLLERS
-//angular.module("CombineModule", ["HomeModule", "IncidenteModule"]);
-
 
 //var app = angular.module('HomeModule',['ngAnimate','ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
 var app = angular.module('HomeModule');
@@ -25,7 +21,7 @@ app.controller('HomeController',['$scope', '$timeout', '$mdSidenav', '$log','$fi
 
     $scope.listView.push(new View(0,"ABM Incidentes","aplicacion/modules/abm-incidentes/views/viewABMIncidentes.html"));
     $scope.listView.push(new View(1,"Casos abiertos","aplicacion/modules/abm-incidentes/views/viewABMIncidentes.html"));
-    $scope.listView.push(new View(2,"Carga de horas","file.html"));
+    $scope.listView.push(new View(2,"ABM Pantallas","aplicacion/modules/abm-pantallas/AbmPantallaController.js"));
 
     $scope.selectedView = $scope.listView[0];
 

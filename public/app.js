@@ -1,11 +1,14 @@
 // declare modules of APLICACION
-angular.module('IncidenteModule',['ngAnimate','ngMaterial', 'ngMessages', 'material.svgAssetsCache']);
-angular.module('HomeModule', ['IncidenteModule']);
+angular.module('libraries',['ngAnimate','ngMaterial', 'ngMessages', 'material.svgAssetsCache','ngRoute','ngCookies']);
+angular.module('AbmPantallaController',['libraries']);
+angular.module('AbmIncidenteModule',['libraries']);
+angular.module('HomeModule', ['libraries']);
 //declare modules of LOGIN
-angular.module('AuthenticationModule', []);
-angular.module('HttpAuthModule', ['AuthenticationModule','HomeModule','ngRoute','ngCookies'])
+angular.module('AuthenticationModule', ['libraries']);
+angular.module('HttpAuthModule',['libraries']);
+angular.module('AppModule', ['HttpAuthModule','AuthenticationModule','HomeModule','IncidenteModule'])
 
- 
+
 
 //BasicHttpAuthExample
 //angular.module('BasicHttpAuthExample', ['AuthenticationModule','HomeModule','ngRoute','ngCookies'])
