@@ -6,7 +6,7 @@ angular.module('HomeModule', ['libraries']);
 //declare modules of LOGIN
 angular.module('AuthenticationModule', ['libraries']);
 angular.module('HttpAuthModule',['libraries']);
-angular.module('AppModule', ['HttpAuthModule','AuthenticationModule','HomeModule','IncidenteModule'])
+angular.module('AppModule', ['HttpAuthModule','AuthenticationModule','HomeModule','AbmIncidenteModule'])
 
 
 
