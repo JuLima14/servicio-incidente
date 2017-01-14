@@ -1,12 +1,12 @@
 // declare modules of APLICACION
 angular.module('libraries',['ngAnimate','ngMaterial', 'ngMessages', 'material.svgAssetsCache','ngRoute','ngCookies']);
-angular.module('AbmPantallaController',['libraries']);
+angular.module('AbmPantallaModule',['libraries']);
 angular.module('AbmIncidenteModule',['libraries']);
 angular.module('HomeModule', ['libraries']);
 //declare modules of LOGIN
 angular.module('AuthenticationModule', ['libraries']);
 angular.module('HttpAuthModule',['libraries']);
-angular.module('AppModule', ['HttpAuthModule','AuthenticationModule','HomeModule','AbmIncidenteModule'])
+angular.module('AppModule', ['HttpAuthModule','AuthenticationModule','HomeModule','AbmIncidenteModule','AbmPantallaModule'])
 
 
 

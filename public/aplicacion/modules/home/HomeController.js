@@ -21,9 +21,9 @@ app.controller('HomeController',['$scope', '$timeout', '$mdSidenav', '$log','$fi
 
     $scope.listView.push(new View(0,"ABM Incidentes","aplicacion/modules/abm-incidentes/views/viewABMIncidentes.html"));
     $scope.listView.push(new View(1,"Casos abiertos","aplicacion/modules/abm-incidentes/views/viewABMIncidentes.html"));
-    $scope.listView.push(new View(2,"ABM Pantallas","aplicacion/modules/abm-pantallas/AbmPantallaController.js"));
+    $scope.listView.push(new View(2,"ABM Pantallas","aplicacion/modules/abm-pantallas/views/viewABMPantallas.html"));
 
-    $scope.selectedView = $scope.listView[0];
+    $scope.selectedView = $scope.listView[2];
 
 
     function debounce(func, wait, context) {
