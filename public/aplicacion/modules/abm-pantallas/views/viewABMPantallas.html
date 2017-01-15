@@ -2,10 +2,20 @@
 <body>
 <div ng-controller="AbmPantallaController" ng-cloak>
   <md-content class="md-padding">
+    <md-imput-container>
+      <label>Nombre Vista</label>
+      <input type="text" ng-model="nameView">
+      <label>Nombre controller</label>
+      <input type="text" ng-model="nameScript">
+      <label>Nombre Html</label>
+      <input type="text" ng-model="nameHtml">
+      <label>Nombre carpeta</label>
+      <input type="text" ng-model="folder">
+      <md-button class="md-primary" ng-click="save()">Guardar</md-button>
+    </md-input-container>
+
     <md-nav-bar  nav-bar-aria-label="navigation links">
-
       <md-nav-item ng-repeat="item in listView" md-nav-click="go(item.id)" name="{{item.name}}">{{item.name}}</md-nav-item>
-
     </md-nav-bar>
     <div class="ext-content">
       <div ng-include="selectedView.url"></div>

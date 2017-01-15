@@ -23,16 +23,15 @@ exports.deleteTable = function(){
     });
     console.log("Transaccion completada correctamente.");
 
-};
+ };
 
 exports.createTable = function (){
 
-
-dbContext.connect((process.env.DATABASE_URL || DATABASE_URL),function(err,client){
+ dbContext.connect((process.env.DATABASE_URL || DATABASE_URL),function(err,client){
    if (err){
       throw err;
   }
-console.log('Comienza creacion de tabla.');
+ console.log('Comienza creacion de tabla.');
  client.query('CREATE TABLE INCIDENTE(id SERIAL PRIMARY KEY,'
                 +'generadoPor VARCHAR(100) not null,'
                 +'fecha       VARCHAR(100) not null,'
@@ -41,10 +40,10 @@ console.log('Comienza creacion de tabla.');
                 +'prioridad   VARCHAR(20) not null,'
                 +'numeroCau   integer not null)');
 
-client.on('end', client.end.bind(client));
-console.log("Transaccion completada correctamente.");
+ client.on('end', client.end.bind(client));
+ console.log("Transaccion completada correctamente.");
   });
-};
+ };
 
 //GET - Devuelve todos los incidentes en la base de datos
 exports.getAll = function(req, res) {
@@ -79,7 +78,7 @@ exports.insert = function(req, res) {
     if(err){
         console.error(err);
       }
-var query = {};
+ var query = {};
       console.log("Comienza la query insert");
 
       query = client.query("INSERT INTO INCIDENTE (generadoPor,fecha,estado,detalle,prioridad,numeroCau)"
@@ -92,4 +91,4 @@ var query = {};
       });
 
   });
-};
+ };
