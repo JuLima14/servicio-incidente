@@ -69,7 +69,7 @@ router.route('/createtable').get(IncidenteServiceImpl.createTable);
 router.route('/deletetable').get(IncidenteServiceImpl.deleteTable);
 router.route('/getall').get(IncidenteServiceImpl.getAll);
 router.route('/insert').post(IncidenteServiceImpl.insert);
-router.route('/saveView').post(PantallaServiceImpl.addPantalla);
+//router.route('/saveView').post(PantallaServiceImpl.addPantalla);
 //router.route('/getbyid/:id').get(IncidenteServiceImpl.getById);
 
 app.use('/', router);
