@@ -14,14 +14,16 @@ var db                   = require("pg");
 var path                 = require('path');
 var config               = require("./properties.js");
 var fs                   = require("file-system");
+
 var IncidenteServiceImpl;
 var PantallaServiceImpl;
+
 if(config.PORT != 8080){
   PantallaServiceImpl = require("../app/services/PantallaService");
   IncidenteServiceImpl = require("../app/services/IncidenteService");
 }else{
-  PantallaServiceImpl = require("../Servicio-incidente/services/PantallaService");
-  IncidenteServiceImpl = require("../Servicio-incidente/services/IncidenteService");
+  PantallaServiceImpl = require("../servicio-incidente/services/PantallaService");
+  IncidenteServiceImpl = require("../servicio-incidente/services/IncidenteService");
 }
 
 //nos permite las transacciones con ssl para conectarnos a la BD
@@ -71,7 +73,6 @@ router.route('/saveView').post(PantallaServiceImpl.addPantalla);
 //router.route('/getbyid/:id').get(IncidenteServiceImpl.getById);
 
 app.use('/', router);
-
 //app.listen(port);
 http.createServer(app).listen(config.PORT, function(){
   console.log("Node server corriendo en http://"+ip.address()+":"+config.PORT);
